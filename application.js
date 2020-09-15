@@ -1,10 +1,11 @@
 const express = require('express');
+const path = require('path'); 
 
 const application = express();
 
-application.get('/', (req, res) => {
-    res.send("<h1>Hello World</h1>"); 
-}); 
+
+// Set templates folder
+application.use(express.static(path.join(__dirname, '/templates'))); 
 
 const PORT = process.env.PORT || 5000; 
 
