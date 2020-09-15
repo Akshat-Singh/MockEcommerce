@@ -1,0 +1,27 @@
+{
+  "name": "e_commerce_ap1",
+  "version": "1.0.0",
+  "description": "Advanced Project 1: E-Commerce Web Platform",
+  "main": "index.js",
+  "scripts": {
+    "start": "node application", 
+    "dev": "nodemon application"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikhilbhave9/e_commerce_ap1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nikhilbhave9/e_commerce_ap1/issues"
+  },
+  "homepage": "https://github.com/nikhilbhave9/e_commerce_ap1#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
