@@ -1,9 +1,6 @@
+
 const router = require('express').Router();  
 const bcrypt = require('bcryptjs'); 
-const session = require('express-session'); 
-
-/* Send intimation to express that sessions will be used */
-
 
 /* Calling the mongoose model we just created */
 let user = require('../models/user.model'); 
@@ -41,35 +38,6 @@ router.route('/signup').post((req, res) => {
         }); 
     }); 
 }); 
-
-/* Trigger the following if "http//www.website.com/users/register" is called */
-router.route('/login').post((req, res) => {
-    /* A POST router that logs-in an existing user */ 
-    const email = req.body.email;
-    const password = req.body.password;
-
-    user.findOne({email})
-        /* Do not confuse var "user" with var "_user". "user" refers to the MongoDB Schema
-           while "_user" refers to the result of the findOne operation */ 
-        .then(_user => {
-            if (!_user)
-                return res.status(400).json({emailnotfound: "Error: Email Not Found"});   
-            
-            /* Do not confuse var "res" with var "_res". "res" refers to the response of the router
-               while "_res" refers to the response of the user entered password vs database hash comparison */
-            bcrypt.compare(password, _user.passwordHash, function(err, _res) {
-                if (err){
-                    console.log("Error: " + err.message); 
-                }
-                if (_res)
-                    res.json("Signed In Successfully"); 
-                else {
-                    res.json("Passwords do not match");
-                }
-            }); 
-        })
-        .catch(error => res.status(400).json("Error: " + error));  
-});
 
 /* Trigger the following if "http//www.website.com/users/add" is called */ 
 router.route('/add').post((req, res) => {
