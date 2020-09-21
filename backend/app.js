@@ -3,6 +3,8 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
+/* Modules needed to implement User Auths and Sessions */
+/* Router -> for routes; bcrypt -> For password security; Session -> User login sessions */ 
 const router = require('express').Router();  
 const bcrypt = require('bcryptjs'); 
 const session = require('express-session'); 
@@ -15,6 +17,8 @@ const port = process.env.port || 7500;
 
 app.use(cors());
 app.use(express.json()); 
+
+/* Session attributes */ 
 app.use(session({
     secret: 'meowoof',
     cookie: {
@@ -30,6 +34,7 @@ mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true});
 
 const connection = mongoose.connection; 
 
+/* If connection is successfully established, give textual confirmation */
 connection.once('open', () => {
     console.log("Database connection established successfully"); 
 }) 
@@ -37,17 +42,10 @@ connection.once('open', () => {
 /* Mandating the requirement of the asked routes, and then using them when triggered */
 const shopRouter = require('./routes/shop'); 
 const userRouter = require('./routes/users'); 
-const e = require('express');
 
+/* Declaring larger routes */ 
 app.use('/shop', shopRouter);
 app.use('/users', userRouter);
-
-/* Send intimation to express that sessions will be used */
-app.use(session({
-    secret: 'meowoof', 
-    resave: false, 
-    cookie: {secure: true}
-}))
 
 /* Listen to any modifications made on the application */ 
 app.listen(port, () => {
@@ -55,15 +53,20 @@ app.listen(port, () => {
 }); 
 
 
+let user = require(__dirname + '/models/user.model');
 /* Trigger the following if "http//www.website.com/users/register" is called */
 app.route('/login').post((req, res) => {
+
     /* Calling the mongoose model we just created */
     let user = require(__dirname + '/models/user.model');  
+
     /* A POST router that logs-in an existing user */ 
     const email = req.body.email;
     const password = req.body.password;
 
+
     user.findOne({email})
+        
         /* Do not confuse var "user" with var "_user". "user" refers to the MongoDB Schema
            while "_user" refers to the result of the findOne operation */ 
         .then(_user => {
@@ -88,12 +91,12 @@ app.route('/login').post((req, res) => {
         .catch(error => res.status(400).json("Error: " + error));  
 });
 
-/* Trigger the following if "http//www.website.com/users/register" is called */
-app.route('/landing').get((req, res) => {
 
-    /* Calling the mongoose model we just created */
+/* Trigger the following if "http//www.website.com/users/landing" is called */
+app.route('/landing').get((req, res) => {
+    /* A GET route triggered as the user information page. */
     if (req.session.user) {
-        res.json(req.session.user);
+        res.json (req.session.user);
     }
     else {
         res.json("Not signed in!"); 
@@ -101,3 +104,38 @@ app.route('/landing').get((req, res) => {
 });
 
 
+/* Trigger the following if "http//www.website.com/users/landing" is called */
+app.route('/profile')
+    
+    /* If the route is reached through a GET request */
+    .get((req, res) => {
+        /* A GET route triggered as the user information page. */
+        if (req.session.user) {
+            res.json (req.session.user);
+        }
+        else {
+            res.json("Not signed in!"); 
+        }
+    })
+
+    /* If the route is reached through a POST request */ 
+    .post((req, res) => {
+        req.session.user.name = req.body.name; 
+        req.session.user.email = req.body.email; 
+
+        bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(req.body.passwordHash, salt, (err, hash) => {
+                req.session.user.passwordHash = hash; 
+                user.findById(req.session.user._id)
+                    .then((_user) => {
+                        _user.passwordHash = hash; 
+                        _user.name = req.body.name;
+                        _user.email = req.body.email;
+                        _user.save(); 
+                    })
+                    
+                    .then(() => res.json("User Updated Successfully!"))
+                    .catch(err => res.status(400).json("Error: " + err)); 
+            }); 
+        });
+    }); 
