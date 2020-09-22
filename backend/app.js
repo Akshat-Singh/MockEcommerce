@@ -56,18 +56,20 @@ app.listen(port, () => {
 let user = require(__dirname + '/models/user.model');
 /* Trigger the following if "http//www.website.com/users/register" is called */
 app.route('/login').post((req, res) => {
+    /* A POST route that logs-in an existing user */
 
     /* Calling the mongoose model we just created */
     let user = require(__dirname + '/models/user.model');  
 
-    /* A POST router that logs-in an existing user */ 
+    /* Extracting values of email and raw password from the JSON object / HTML form */ 
     const email = req.body.email;
     const password = req.body.password;
 
-
+    
+    /* Look for the email in the database */
     user.findOne({email})
         
-        /* Do not confuse var "user" with var "_user". "user" refers to the MongoDB Schema
+        /* Do not confuse var "user" with var "_user". "user" refers to the local instance of the MongoDB Schema
            while "_user" refers to the result of the findOne operation */ 
         .then(_user => {
             if (!_user)
@@ -79,10 +81,14 @@ app.route('/login').post((req, res) => {
                 if (err){
                     return res.json("Error: " + err.message); 
                 }
+
+                /* If the passwords match, store the users data in the session and redirect him to the landing page */ 
                 if (_res) {
                     req.session.user = _user; 
                     return res.redirect('/landing'); 
                 }
+
+                /* Else, return a negative response */
                 else {
                     return res.json("Passwords do not match"); 
                 }
@@ -95,9 +101,13 @@ app.route('/login').post((req, res) => {
 /* Trigger the following if "http//www.website.com/users/landing" is called */
 app.route('/landing').get((req, res) => {
     /* A GET route triggered as the user information page. */
+    
+    /* If there is a valid session in place, send back the data of the user */
     if (req.session.user) {
         res.json (req.session.user);
     }
+
+    /* Otherwise, send a negative response */ 
     else {
         res.json("Not signed in!"); 
     }
