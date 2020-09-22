@@ -120,13 +120,22 @@ app.route('/profile')
 
     /* If the route is reached through a POST request */ 
     .post((req, res) => {
+
+        /* Extract the name and email from json object/html form */
         req.session.user.name = req.body.name; 
         req.session.user.email = req.body.email; 
 
+        /* Hash the newly entered password */ 
         bcrypt.genSalt(10, (err, salt) => {
             bcrypt.hash(req.body.passwordHash, salt, (err, hash) => {
+                
+                /* Extract the bare password from the html form/json object */
                 req.session.user.passwordHash = hash; 
+
+                /* Find the user id of the currently logged in user */
                 user.findById(req.session.user._id)
+                    
+                    /* If found, update the values */
                     .then((_user) => {
                         _user.passwordHash = hash; 
                         _user.name = req.body.name;
@@ -134,6 +143,7 @@ app.route('/profile')
                         _user.save(); 
                     })
                     
+                    /* And then send a json response with status */ 
                     .then(() => res.json("User Updated Successfully!"))
                     .catch(err => res.status(400).json("Error: " + err)); 
             }); 
