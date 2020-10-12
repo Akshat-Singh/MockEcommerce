@@ -175,7 +175,7 @@ app.route('/users/profile')
                     })
                     
                     /* And then send a json response with status */ 
-                    .then(() => res.json("User Updated Successfully!"))
+                    .then(_item => res.json(item))
 
                     .catch(err => res.status(400).json("Error: " + err)); 
             }); 

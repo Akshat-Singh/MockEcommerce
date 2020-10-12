@@ -7,7 +7,8 @@ const userSecondarySchema = new Schema({
     address: {type: String},
     phone: {type: String},
     purchases: {type: Array}, 
-    wishlist: {type: Array}
+    wishlist: {type: Array},
+    cart: {type: Array}
 });
  
 const userSecondary = mongoose.model('userSecondary', userSecondarySchema); 
