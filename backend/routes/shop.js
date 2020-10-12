@@ -21,7 +21,7 @@ router.route('/').get((req, res) => {
 /* Trigger the following if "http//www.website.com/users/add" is called */ 
 router.route('/add').post((req, res) => {
     /* A POST route that adds a user to the database */
-
+    
     const itemName = req.body.itemName;
     const description = req.body.description;
     const cost = Number(req.body.cost); 

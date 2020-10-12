@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 
 /* Calling the mongoose model we just created */
 let user = require('../models/user.model'); 
+const userSecondary = require('../models/user_secondary.model');
 
 /* Trigger the following when "http//www.website.com/users/" is called */
 router.route('/').get((req, res) => {
@@ -26,39 +27,24 @@ router.route('/signup').post((req, res) => {
     const email = req.body.email;
     const passwordHash = req.body.password;
 
-    const newUser = new user({name, email, passwordHash}); 
+    const newUser = new user({name, email, passwordHash});
 
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.passwordHash, salt, (err, hash) => {
-            newUser.passwordHash = hash; 
+            newUser.passwordHash = hash;
             newUser
                 .save()
-                .then(() => res.json("User Added Successfully!"))
-                .catch(err => res.status(400).json("Error: " + err)); 
+                .then(() => {
+                    const dummyStr = "";
+                    const dummyArr = new Array();  
+                    
+                    const userData = new userSecondary({email, dummyStr, dummyStr, dummyArr, dummyArr});
+                    userData.save()
+                            .then(() => {res.json("User Added Successfully!")})
+                })
+                .catch(err => res.status(400).json("Error: " + err));    
         }); 
     }); 
 }); 
-
-/* Trigger the following if "http//www.website.com/users/add" is called */ 
-router.route('/add').post((req, res) => {
-    /* A POST route that adds a user to the database */
-
-    const username = req.body.username; 
-    const newUser = new user({username}); 
-
-    newUser.save()
-        .then(() => res.json("User Added!"))
-        .catch(err => res.status(400).json("Error: " + err)); 
-}); 
-
-/* Trigger the following if "http//www.website.com/users/delete" is called */ 
-router.route('/delete/:id').delete((req, res) => {
-    /* A POST route that adds a user to the database */
-
-    user.findByIdAndDelete(req.params.id)
-        .then(() => res.json("User Deleted Successfully!"))
-        .catch(err => res.status(400).json("Error: " + err)); 
-}); 
-
 
 module.exports = router;

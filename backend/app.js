@@ -28,16 +28,18 @@ app.use(session({
     }
 })); 
 
+
 /* Pull in the Mongo credentials from .env, and connect */
 const uri = process.env.MDBATLS; 
 mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true}); 
-
 const connection = mongoose.connection; 
+
 
 /* If connection is successfully established, give textual confirmation */
 connection.once('open', () => {
-    console.log("Database connection established successfully"); 
+    console.log("[MongoDB]: Database connection established successfully"); 
 }) 
+
 
 /* Mandating the requirement of the asked routes, and then using them when triggered */
 const shopRouter = require('./routes/shop'); 
@@ -54,12 +56,12 @@ app.listen(port, () => {
 
 
 let user = require(__dirname + '/models/user.model');
-/* Trigger the following if "http//www.website.com/users/register" is called */
-app.route('/login').post((req, res) => {
-    /* A POST route that logs-in an existing user */
+let userSecondary = require(__dirname + '/models/user_secondary.model'); 
 
-    /* Calling the mongoose model we just created */
-    let user = require(__dirname + '/models/user.model');  
+
+/* Trigger the following if "http//www.website.com/users/login" is called */
+app.route('/users/login').post((req, res) => {
+    /* A POST route that logs-in an existing user */
 
     /* Extracting values of email and raw password from the JSON object / HTML form */ 
     const email = req.body.email;
@@ -85,7 +87,7 @@ app.route('/login').post((req, res) => {
                 /* If the passwords match, store the users data in the session and redirect him to the landing page */ 
                 if (_res) {
                     req.session.user = _user; 
-                    return res.redirect('/landing'); 
+                    return res.redirect('/users/landing'); 
                 }
 
                 /* Else, return a negative response */
@@ -99,7 +101,7 @@ app.route('/login').post((req, res) => {
 
 
 /* Trigger the following if "http//www.website.com/users/landing" is called */
-app.route('/landing').get((req, res) => {
+app.route('/users/landing').get((req, res) => {
     /* A GET route triggered as the user information page. */
     
     /* If there is a valid session in place, send back the data of the user */
@@ -115,13 +117,31 @@ app.route('/landing').get((req, res) => {
 
 
 /* Trigger the following if "http//www.website.com/users/landing" is called */
-app.route('/profile')
+app.route('/users/profile')
     
     /* If the route is reached through a GET request */
     .get((req, res) => {
         /* A GET route triggered as the user information page. */
         if (req.session.user) {
-            res.json (req.session.user);
+
+            let resJSON = new Array(); 
+            resJSON.push(req.session.user);
+            
+            let email = req.session.user.email;
+
+            userSecondary
+                .findOne({email})
+                .then(_user => {
+ 
+                    if (!_user)
+                        return res.json("Error: Email Not Found");   
+                    else {  
+                        resJSON.push(_user);
+                        console.log(resJSON);
+                        res.json(resJSON);
+                    }
+                })                      
+                .catch(error => res.status(400).json("Error: " + error));
         }
         else {
             res.json("Not signed in!"); 
@@ -132,6 +152,7 @@ app.route('/profile')
     .post((req, res) => {
 
         /* Extract the name and email from json object/html form */
+        console.log(req.session.user); 
         req.session.user.name = req.body.name; 
         req.session.user.email = req.body.email; 
 
@@ -155,6 +176,7 @@ app.route('/profile')
                     
                     /* And then send a json response with status */ 
                     .then(() => res.json("User Updated Successfully!"))
+
                     .catch(err => res.status(400).json("Error: " + err)); 
             }); 
         });
