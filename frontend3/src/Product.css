@@ -1,0 +1,15 @@
+/* .product_rating {
+    display: flex;
+} */
+
+.product {
+    display: flex;
+    flex-direction: column;
+}
+
+.product > img {
+    max-height: 100px;
+    width: 50%;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
