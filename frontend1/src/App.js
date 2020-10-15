@@ -2,6 +2,11 @@ import React from 'react';
 import './App.css';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
 import Header from "./Header";
+import {GoogleLogin} from "react-google-login";
+
+const responseGoogle = response => {
+  console.log(response);
+};
 
 function App() {
   return (
@@ -22,6 +27,12 @@ function App() {
             <h1>
               Login page
             </h1>
+
+            <GoogleLogin
+            clientId = "741110853489-3h88ghsg0u7qmjsjs6856g132dt9l5nk.apps.googleusercontent.com"
+            onSuccess = {responseGoogle}
+            onFailure = {responseGoogle}
+            />
           </Route>
           {/* Default path */}
           <Route path = "/">
