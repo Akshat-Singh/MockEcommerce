@@ -15,7 +15,13 @@ require('dotenv').config();
 const app = express();
 const port = process.env.port || 5000; 
 
-app.use(cors());
+var whitelist = ['http://localhost:5000', 'http://localhost:3000']
+var corsOps = {
+    origin: true, 
+    credentials: true
+}
+app.use(cors(corsOps)); 
+app.options('*', cors());
 app.use(express.json()); 
 
 /* Session attributes */ 
@@ -53,4 +59,3 @@ app.use('/users', userRouter);
 app.listen(port, () => {
     console.log(`Server deployed on port ${port}`); 
 }); 
-
