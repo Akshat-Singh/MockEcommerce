@@ -28,6 +28,11 @@ function App() {
               Login page
             </h1>
 
+            <form>
+              <input type="text" id="email" placeholder="Email"></input> 
+              <input type="password" id="password" placeholder="Password"></input> 
+              <button id="submit" type="submit">Submit</button>
+            </form>
             <GoogleLogin
             clientId = "741110853489-3h88ghsg0u7qmjsjs6856g132dt9l5nk.apps.googleusercontent.com"
             onSuccess = {responseGoogle}
