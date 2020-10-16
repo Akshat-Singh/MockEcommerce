@@ -11,7 +11,7 @@ const responseGoogle = response => {
 };
 
 function App() {
-  return (
+return (
     <Router>
       <div className="App">
         {/* Making different links after / */}  
