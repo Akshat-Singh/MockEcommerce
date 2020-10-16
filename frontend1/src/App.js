@@ -3,18 +3,18 @@ import axios from 'axios'
 import './App.css';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
 import Header from "./Header";
-import {GoogleLogin} from "react-google-login";
 import UserLogin from "./components/user-signin.component";
+import UserRegister from "./components/user-register.component";
 
 const responseGoogle = response => {
   console.log(response);
 };
 
 function App() {
-  return (
+return (
     <Router>
       <div className="App">
-        {/* Making different links after / */}
+        {/* Making different links after / */}  
         <Switch>
           <Route path = "/checkout">
 
@@ -25,6 +25,7 @@ function App() {
           </Route> 
 
           <Route path= "/users/login" component={UserLogin}/>
+          <Route path="/users/register" component={UserRegister}/>
     
           {/* Default path */}
           <Route path = "/">
