@@ -1,11 +1,13 @@
 *{
    margin: 0; 
+   background-color: rgb(224, 220, 217);
 }
 
 .homepage {
    display: flex;
    flex-wrap: wrap;
    flex-direction: row;
+   
    
 }
 
@@ -29,7 +31,11 @@
    flex: 4; 
    border: 1px #ccc solid;
    padding: 10px;
+   margin: 5px;
    min-width: 200px;
    max-width: 400px;
+   background-color: rgb(243, 240, 247);  
+   
+   
    
 }

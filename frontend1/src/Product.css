@@ -7,7 +7,6 @@
     flex-direction: column;
     max-height: 400px;
     min-width: 200px;
-    background-color: blueviolet;  
     align-items: center; 
     justify-content: start;
 }
@@ -21,6 +20,8 @@
     margin-bottom: 7.5px;
     order: 0;
 }
+
+
 
 .product_rating {
     margin-bottom: 7.5px;
@@ -43,9 +44,19 @@
 }
 
 .product > img {
-    max-height: 100px;
-    width: 20%;
-    object-fit: contain;
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
     margin-bottom: 15px;
     order: 0;
 }
+
+/* Background color */
+.product_title, .product_price, .product_rating, .product_price > small, .product_price > strong, .product_category, .product_reviews, .product_id {
+    background-color: rgb(243, 240, 247);  
+
+
+}
+
+
+
