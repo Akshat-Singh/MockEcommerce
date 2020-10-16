@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {GoogleLogin} from "react-google-login";
 
+axios.defaults.baseURL = "";
+
 const responseGoogle = response => {
     console.log(response);
 };
@@ -35,13 +37,13 @@ export default class UserLogin extends Component {
         e.preventDefault();
 
         const user = {
-            username: this.state.username, 
+            email: this.state.username, 
             password: this.state.password
         }
 
-        console.log(user);
+        console.log(user); 
 
-        axios.post('http//localhost:7500/users/login', user)
+        axios.post('http://localhost:5000/users/login', user)
             .then(res => console.log(res.data)); 
         
         this.setState({
