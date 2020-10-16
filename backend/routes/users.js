@@ -36,10 +36,10 @@ router.route('/register').post((req, res) => {
                 .then(() => {
                     const dummyStr = "";
                     const dummyArr = new Array();  
-                    
-                    const userData = new userSecondary({email, dummyStr, dummyStr, dummyArr, dummyArr});
+                    const userData = new userSecondary({email: email, address: "", phone: "", purchases: new Array, wishlist: new Array(), cart: new Array()});
                     userData.save()
                             .then(() => {res.json("User Added Successfully!")})
+                            .catch(err => res.json("Error: " + err)); 
                 })
                 .catch(err => res.status(400).json("Error: " + err));    
         }); 
@@ -54,7 +54,7 @@ router.route('/login')
         /* Extracting values of email and raw password from the JSON object / HTML form */ 
         const email = req.body.email;
         const password = req.body.password;
-
+        console.log(email); 
         
         /* Look for the email in the database */
         user.findOne({email})
@@ -62,14 +62,15 @@ router.route('/login')
             /* Do not confuse var "user" with var "_user". "user" refers to the local instance of the MongoDB Schema
             while "_user" refers to the result of the findOne operation */ 
             .then(_user => {
+                console.log(_user); 
                 if (!_user)
-                    return res.status(400).json("Error: Email Not Found");   
+                    return res.status(400).json("Error in email: Email Not Found");   
                 
                 /* Do not confuse var "res" with var "_res". "res" refers to the response of the router
                 while "_res" refers to the response of the user entered password vs database hash comparison */
                 bcrypt.compare(password, _user.passwordHash, function(err, _res) {
                     if (err){
-                        return res.json("Error: " + err.message); 
+                        return res.json("Error in Hash: " + err.message); 
                     }
 
                     /* If the passwords match, store the users data in the session and redirect him to the landing page */ 
