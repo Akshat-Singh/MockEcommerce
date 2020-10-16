@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
 import Header from "./Header";
 import UserLogin from "./components/user-signin.component";
 import UserRegister from "./components/user-register.component";
+import UserProfile from "./components/user-profile.component";
 
 const responseGoogle = response => {
   console.log(response);
@@ -24,8 +25,9 @@ return (
             
           </Route> 
 
-          <Route path= "/users/login" component={UserLogin}/>
+          <Route path="/users/login" component={UserLogin}/>
           <Route path="/users/register" component={UserRegister}/>
+          <Route path="/users/profile" component={UserProfile}/>
     
           {/* Default path */}
           <Route path = "/">
