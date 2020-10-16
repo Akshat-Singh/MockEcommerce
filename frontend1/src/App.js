@@ -1,8 +1,10 @@
 import React from 'react';
+import axios from 'axios'
 import './App.css';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
 import Header from "./Header";
 import {GoogleLogin} from "react-google-login";
+import UserLogin from "./components/user-signin.component";
 
 const responseGoogle = response => {
   console.log(response);
@@ -12,7 +14,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-
         {/* Making different links after / */}
         <Switch>
           <Route path = "/checkout">
@@ -23,22 +24,8 @@ function App() {
             
           </Route> 
 
-          <Route path = "/login">
-            <h1>
-              Login page
-            </h1>
-
-            <form>
-              <input type="text" id="email" placeholder="Email"></input> 
-              <input type="password" id="password" placeholder="Password"></input> 
-              <button id="submit" type="submit">Submit</button>
-            </form>
-            <GoogleLogin
-            clientId = "741110853489-3h88ghsg0u7qmjsjs6856g132dt9l5nk.apps.googleusercontent.com"
-            onSuccess = {responseGoogle}
-            onFailure = {responseGoogle}
-            />
-          </Route>
+          <Route path= "/users/login" component={UserLogin}/>
+    
           {/* Default path */}
           <Route path = "/">
 
