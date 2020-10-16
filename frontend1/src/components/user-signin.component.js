@@ -11,6 +11,24 @@ export default class UserLogin extends Component {
         super(props);
 
         this.onSubmit = this.onSubmit.bind(this);
+        this.onChangeUsername = this.onChangeUsername.bind(this);
+        this.onChangePassword = this.onChangePassword.bind(this);  
+
+        this.state = {
+            username: '', password: ''
+        }
+    }    
+
+    onChangeUsername(e) {
+        this.setState({
+          username: e.target.value 
+        })
+    }
+
+    onChangePassword(e) {
+        this.setState({
+            password: e.target.value
+        })
     }
 
     onSubmit(e) {
@@ -21,11 +39,14 @@ export default class UserLogin extends Component {
             password: this.state.password
         }
 
-        axios.post('http//localhost:5000/users/login', user)
+        console.log(user);
+
+        axios.post('http//localhost:7500/users/login', user)
             .then(res => console.log(res.data)); 
         
         this.setState({
-            username: ''
+            username: '',
+            password: ''
         })
     }
 
@@ -35,8 +56,8 @@ export default class UserLogin extends Component {
                 <h1> Login page </h1>
 
                 <form onSubmit={this.onSubmit}>
-                    <input type="text" id="email" placeholder="Email"></input> 
-                    <input type="password" id="password" placeholder="Password"></input> 
+                    <input type="text" id="email" placeholder="Email" onChange={this.onChangeUsername}></input> 
+                    <input type="password" id="password" placeholder="Password" onChange={this.onChangePassword}></input> 
                     <button id="submit" type="submit">Submit</button>
                 </form>
                 <GoogleLogin
