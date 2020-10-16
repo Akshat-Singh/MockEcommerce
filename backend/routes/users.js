@@ -64,13 +64,13 @@ router.route('/login')
             .then(_user => {
                 console.log(_user); 
                 if (!_user)
-                    return res.status(400).json("Error in email: Email Not Found");   
+                    return res.status(400).json("Error: Email Not Found");   
                 
                 /* Do not confuse var "res" with var "_res". "res" refers to the response of the router
                 while "_res" refers to the response of the user entered password vs database hash comparison */
                 bcrypt.compare(password, _user.passwordHash, function(err, _res) {
                     if (err){
-                        return res.json("Error in Hash: " + err.message); 
+                        return res.json("Error: " + err.message); 
                     }
 
                     /* If the passwords match, store the users data in the session and redirect him to the landing page */ 
@@ -95,11 +95,10 @@ router.route('/profile')
     .get((req, res) => {
         /* A GET route triggered as the user information page. */
         if (req.session.user) {
+            res.json(req.session.user); 
 
-            let resJSON = new Array(); 
-            resJSON.push(req.session.user);
             
-            let email = req.session.user.email;
+            /*let email = req.session.user.email;
 
             userSecondary
                 .findOne({email})
@@ -113,9 +112,10 @@ router.route('/profile')
                         res.json(resJSON);
                     }
                 })                      
-                .catch(error => res.status(400).json("Error: " + error));
+                .catch(error => res.status(400).json("Error: " + error)); */
         }
         else {
+            console.log("Not signed in"); 
             res.json("Not signed in!"); 
         }
     })
@@ -169,6 +169,49 @@ router.route('/landing').get((req, res) => {
         res.json(req.session.user); 
     }
 });
+
+
+
+router.route('/wishlist').get((req, res) => {
+    if (req.session.user) {
+        let email = req.session.user.email;
+
+            userSecondary
+                .findOne({email})
+                .then(_userData => {
+ 
+                    if (!_userData)         
+                        return res.json("Error: Data Corrupt");   
+                    else {  
+                        res.json(_userData.wishlist);
+                    }
+                })                      
+                .catch(error => res.status(400).json("Error: " + error));
+    }
+    else
+        res.json("Error: Not Signed In"); 
+});
+
+
+router.route('/cart').get((req, res) => {
+    if (req.session.user) {
+        let email = req.session.user.email;
+
+            userSecondary
+                .findOne({email})
+                .then(_userData => {
+ 
+                    if (!_userData)         
+                        return res.json("Error: Data Corrupt");   
+                    else {  
+                        res.json(_userData.cart);
+                    }
+                })                      
+                .catch(error => res.status(400).json("Error: " + error));
+    }
+    else
+        res.json("Error: Not Signed In");
+})
 
 
 module.exports = router;
