@@ -32,6 +32,8 @@ router.route('/add').post((req, res) => {
         cost
     }); 
 
+    newShop.totalRatings = 0; 
+    newShop.avgRatings = 0; 
     newShop.save()
         .then(() => res.json("Item Added!"))
         .catch(err => res.status(400).json("Error: " + err)); 
@@ -86,10 +88,41 @@ router.route('/:id')
     .get((req, res) => {
     /* A GET route that extracts the details of a product by its ID */
 
-    shop.findById(req.params.id)
-        .then(_item => res.json(_item))
-        .catch(error => res.status(400).json("Error: " + error)); 
-});
+        shop.findById(req.params.id)
+            .then(_item => res.json(_item))
+            .catch(error => res.status(400).json("Error: " + error)); 
+    });
+
+
+router.route('/:id/rating')
+    .get((req, res) => {
+
+        shop.findById(req.params.id)
+            .then(_item => res.json(_item))
+            .catch(err => res.status(400).json("Error: " + err));
+    })
+
+    .post((req, res) => {
+        shop.findById(req.params.id)
+            .then(_item => {
+                let sessEmail = req.session.user.email;
+
+                if (_item.ratings.find(_user => {return _user.email == sessEmail}))  
+                    res.json("Your Rating already exists")
+                else {
+                    _item.totalRatings = _item.totalRatings + 1;
+                    _item.avgRatings = _item.avgRatings + parseFloat(req.body.yourRating) / _item.totalRatings; 
+                    _item.ratings.push({"email": req.session.user.email, "rating": req.body.yourRating});
+                    _item.save()
+                        .then(() => res.json("Your Rating has been recorded"))
+                        .catch(err => res.status(500).json("Error: " + error))
+                }
+            })
+            .catch(err => res.status(500).json("Error: " + error))
+    });
+
+
+router.route('/:id/')
 
 
 module.exports = router;
