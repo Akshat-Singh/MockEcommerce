@@ -1,4 +1,3 @@
-
 const router = require('express').Router();  
 const bcrypt = require('bcryptjs'); 
 
@@ -76,7 +75,7 @@ router.route('/login')
                     /* If the passwords match, store the users data in the session and redirect him to the landing page */ 
                     if (_res) {
                         req.session.user = _user; 
-                        return res.json(req.session.user); 
+                        return res.redirect('/users/profile'); 
                     }
 
                     /* Else, return a negative response */

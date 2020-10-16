@@ -22,7 +22,7 @@ function Header() {
 
             <div className = "header__nav">
 
-                <Link to =  "/login" className = "header__link">
+                <Link to =  "/users/login" className = "header__link">
 
                     <div className = "header__option">
                         <span className = "header__selection"> Log in</span>

@@ -3,7 +3,6 @@ import axios from 'axios';
 import {GoogleLogin} from "react-google-login";
 
 axios.defaults.baseURL = "";
-
 const responseGoogle = response => {
     console.log(response);
 };
@@ -47,8 +46,8 @@ export default class UserLogin extends Component {
             .then(res => console.log(res.data)); 
         
         this.setState({
-            username: '',
-            password: ''
+            username: this.state.username,
+            password: this.state.password
         })
     }
 
