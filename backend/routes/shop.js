@@ -94,7 +94,7 @@ router.route('/products/:id')
     });
 
 
-router.route('/:id/rating')
+router.route('/products/:id/rating')
     .get((req, res) => {
 
         shop.findById(req.params.id)
@@ -111,7 +111,7 @@ router.route('/:id/rating')
                     res.json("Your Rating already exists")
                 else {
                     _item.totalRatings = _item.totalRatings + 1;
-                    _item.avgRatings = _item.avgRatings + parseFloat(req.body.yourRating) / _item.totalRatings; 
+                    _item.avgRatings = (_item.avgRatings + parseFloat(req.body.yourRating)) / _item.totalRatings; 
                     _item.ratings.push({"email": req.session.user.email, "rating": req.body.yourRating});
                     _item.save()
                         .then(() => res.json("Your Rating has been recorded"))

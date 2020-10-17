@@ -13,9 +13,25 @@ export default class ProductsView extends Component{
 
         this.state = {
             mdata: [],
+            rating: ''
         }
+
+        this.onChangeRating = this.onChangeRating.bind(this); 
+        this.submitRating = this.submitRating.bind(this); 
     }
 
+    onChangeRating(e) {
+        this.setState({rating: e.target.value});
+    }
+
+    submitRating(e) {
+        e.preventDefault();
+        axios.post('http://localhost:5000/shop/products/' + this.props.match.params.id + '/rating', {"yourRating": this.state.rating})
+            .then(res => {
+                alert(res)
+            })
+            .catch(err => alert(err)); 
+    }
 
      componentWillMount() { 
         axios.get('http://localhost:5000/shop/products/' + this.props.match.params.id)  
@@ -44,7 +60,27 @@ export default class ProductsView extends Component{
                             id = {this.state.mdata._id}
                         />
         
-                    </div>
+                </div>
+
+                <div className="rating">
+                    Average Rating: {this.state.mdata['avgRatings']}
+                    Total Reviews: {this.state.mdata['totalRatings']}  
+                </div> 
+
+                <div className="rate">
+                    Your rating
+                    <form onSubmit={this.submitRating}>
+                        <select onChange={this.onChangeRating}>
+                            <option value="0" selected={true} disabled={true}>0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <button type="submit">Submit Rating</button>
+                    </form> 
+                </div> 
             </div>
         )
     }

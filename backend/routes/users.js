@@ -36,7 +36,7 @@ router.route('/register').post((req, res) => {
                 .then(() => {
                     const dummyStr = "";
                     const dummyArr = new Array();  
-                    const userData = new userSecondary({email: email, address: "", phone: "", purchases: new Array, wishlist: new Array(), cart: new Array()});
+                    const userData = new userSecondary({email: email, address: "", phone: "", purchases: new Array(), wishlist: new Array(), cart: new Array()});
                     userData.save()
                             .then(() => {res.json("User Added Successfully!")})
                             .catch(err => res.json("Error: " + err)); 
