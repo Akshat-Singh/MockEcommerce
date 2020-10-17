@@ -19,7 +19,7 @@ export default class UserLogin extends Component {
         this.onChangePassword = this.onChangePassword.bind(this);  
 
         this.state = {
-            username: '', password: ''
+            username: '', password: '', redirect: false
         }
     }    
 
@@ -48,7 +48,7 @@ export default class UserLogin extends Component {
         axios.post('http://localhost:5000/users/login', user)
             .then(res => {
                 sessionStorage.setItem("username", res.data.name);
-                return <Redirect to='/'/>
+                this.setState({redirect: true}); 
             }); 
         
         this.setState({
@@ -58,6 +58,9 @@ export default class UserLogin extends Component {
     }
 
     render() {
+        if (this.state.redirect)
+            return <Redirect to='/'/>
+
         return (
             <div className = "login"> 
                   {/* Logo */}
@@ -77,7 +80,7 @@ export default class UserLogin extends Component {
                         <h5>
                             Email
                         </h5>
-                        <input type="text" id="email" placeholder="Email" onChange={this.onChangeUsername}></input> 
+                        <input type="text" id="email" placeholder="Email" onChange={this.onChangeUsername}></input>     
                         <h5>
                             Password
                         </h5>
