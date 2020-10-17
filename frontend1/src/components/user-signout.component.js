@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export default class UserSignout extends Component {
     componentWillMount() {
-        sessionStorage.setItem("username", null);
+        sessionStorage.setItem("username", "");
         axios.get("http://localhost:5000/users/signout")
             .then(() => {
                 console.log("Signed Out"); 

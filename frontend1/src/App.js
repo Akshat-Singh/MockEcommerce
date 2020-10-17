@@ -11,15 +11,12 @@ import UserProfile from "./components/user-profile.component";
 import UserWishlist from "./components/user-wishlist.component";
 import UserCart from "./components/user-cart.component";
 import UserSignout from "./components/user-signout.component"
-import Product from "./Product.js";
+
 
 import ProductsHome from "./components/products-home.component"; 
+import ProductsView from "./components/products-view.component";
 
 axios.defaults.withCredentials = true; 
-
-const responseGoogle = response => {
-  console.log(response);
-};
 
 function App() {
 return (
@@ -41,7 +38,9 @@ return (
           <Route path="/users/wishlist" component={UserWishlist}/>
           <Route path="/users/cart" component={UserCart}/>
           <Route path="/users/signout" component={UserSignout}/>
-          <Route path = "/products" component={ProductsHome}/>         
+          <Route path="/products/:id" component={ProductsView}/> 
+          <Route path = "/products" component={ProductsHome}/>    
+          
           
           {/* ----------------------------------------------- */}
 

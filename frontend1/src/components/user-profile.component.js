@@ -13,7 +13,6 @@ export default class UserProfile extends Component {
      componentWillMount() {
         axios.get('http://localhost:5000/users/profile')
             .then(res => {
-               const data = (res.data);
                 this.setState(res.data); 
                 console.log(this.state); 
 

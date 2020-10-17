@@ -84,7 +84,7 @@ router.route('/update/:id').get((req, res) => {
 
 
 /* Trigger the following if "http//www.website.com/shop/{id}" is called through get*/ 
-router.route('/:id')
+router.route('/products/:id')
     .get((req, res) => {
     /* A GET route that extracts the details of a product by its ID */
 
