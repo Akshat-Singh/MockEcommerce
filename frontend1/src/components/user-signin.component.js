@@ -3,6 +3,7 @@ import axios from 'axios';
 import {GoogleLogin} from "react-google-login";
 import "./Login.css";
 import {Link} from "react-router-dom";
+import {Redirect} from "react-router-dom"
 
 axios.defaults.baseURL = "";
 const responseGoogle = response => {
@@ -47,7 +48,7 @@ export default class UserLogin extends Component {
         axios.post('http://localhost:5000/users/login', user)
             .then(res => {
                 sessionStorage.setItem("username", res.data.name);
-                console.log("Session Storage set to: " + sessionStorage.getItem("username")); 
+                return <Redirect to='/'/>
             }); 
         
         this.setState({
