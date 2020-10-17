@@ -106,29 +106,31 @@ router.route('/profile')
 
         /* Extract the name and email from json object/html form */
         console.log(req.session.user); 
-        req.session.user.name = req.body.name; 
-        req.session.user.email = req.body.email; 
 
         /* Hash the newly entered password */ 
         bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(req.body.passwordHash, salt, (err, hash) => {
-                
-                /* Extract the bare password from the html form/json object */
-                req.session.user.passwordHash = hash; 
-
+            bcrypt.hash(req.body.password, salt, (err, hash) => {                
+                 
                 /* Find the user id of the currently logged in user */
                 user.findById(req.session.user._id)
                     
                     /* If found, update the values */
                     .then((_user) => {
+                        if (req.body.password === "")
+                            hash = _user.passwordHash;
                         _user.passwordHash = hash; 
                         _user.name = req.body.name;
                         _user.email = req.body.email;
-                        _user.save(); 
+                        console.log(_user.email); 
+                        _user.save() 
+                            .then(() => {
+                                req.session.user = _user; 
+                                res.json("User Updated Successfully")
+                            })
+                            .catch(err => res.json("Error: " + err)); 
                     })
                     
                     /* And then send a json response with status */ 
-                    .then(_item => res.json(item))
 
                     .catch(err => res.status(400).json("Error: " + err)); 
             }); 
