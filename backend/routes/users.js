@@ -214,13 +214,11 @@ router.route('/cart').get((req, res) => {
 })
 
 
-function sessionDetails() {
-    if (req.session.user)
-        return req.session.user; 
-    
-    else
-        return null; 
-}
+router.route('/signout')
+    .get((req, res) => {
+        req.session.user = null; 
+        res.json("Signed Out"); 
+    });
 
 
 module.exports = router;

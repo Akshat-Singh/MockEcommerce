@@ -22,7 +22,7 @@ function Header() {
     
                 <div className = "header__nav">
     
-                    <Link to =  "/users/login" className = "header__link">
+                    <Link to =  "/users/profile" className = "header__link">
     
                         <div className = "header__option">
                             <span className = "header__selection"> {sessionStorage.getItem("username")} </span>
@@ -43,7 +43,7 @@ function Header() {
                         </div>
                     </Link>
                     
-                    <Link to =  "/users/register" className = "header__link">
+                    <Link to =  "/users/signout" className = "header__link">
     
                         <div className = "header__option">
                             <span className = "header__selection"> Logout </span>
