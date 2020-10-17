@@ -54,8 +54,6 @@
 /* Background color */
 .product_title, .product_price, .product_rating, .product_price > small, .product_price > strong, .product_category, .product_reviews, .product_id {
     background-color: rgb(243, 240, 247);  
-
-
 }
 
 

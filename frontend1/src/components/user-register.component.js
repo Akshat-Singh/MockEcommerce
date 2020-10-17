@@ -1,6 +1,8 @@
 import React, { Component } from 'react'; 
 import axios from 'axios';
 import {GoogleLogin} from "react-google-login";
+import "./Login.css";
+import {Link} from "react-router-dom";
 
 axios.defaults.baseURL = "";
 axios.defaults.withCredentials = true; 
@@ -68,20 +70,43 @@ export default class UserRegister extends Component {
 
     render() {
         return (
-            <div> 
-                <h1> Register page </h1>
+            <div className = "login">
 
-                <form onSubmit={this.onSubmit}>
-                    <input type="text" id="email" placeholder="Email" onChange={this.onChangeUsername}></input> 
-                    <input type="password" id="password" placeholder="Password" onChange={this.onChangePassword}></input>
-                    <input type="confirm-password" id="confirm-password" placeholder="Confirm Password" onChange={this.onChangeConfirmPassword}></input> 
-                    <button id="submit" type="submit">Submit</button>
-                </form>
-                <GoogleLogin
-                    clientId = "741110853489-3h88ghsg0u7qmjsjs6856g132dt9l5nk.apps.googleusercontent.com"
-                    onSuccess = {responseGoogle}
-                    onFailure = {responseGoogle}
-                />
+                {/* Logo */}
+                <Link to = "/">
+
+                     <img className = "login__logo" src = "http://pngimg.com/uploads/wordpress/wordpress_PNG43.png" alt = "" />
+
+                </Link> 
+                
+                <div className = "login__container">
+
+                    <h1>
+                        Register
+                    </h1>
+
+                    <form onSubmit={this.onSubmit}>
+                        <h5>
+                            Email
+                        </h5>
+                        <input type="text" id="email" placeholder="Email" onChange={this.onChangeUsername}></input> 
+                        <h5>
+                            Password
+                        </h5>
+                        <input type="password" id="password" placeholder="Password" onChange={this.onChangePassword}></input>
+                        <h5>
+                            Confirm Password
+                        </h5>
+                        <input type="confirm-password" id="confirm-password" placeholder="Confirm Password" onChange={this.onChangeConfirmPassword}></input> 
+                        <button className = "login__submit" id="submit" type="submit">Submit</button>
+                    </form>
+                    <GoogleLogin className = "login__google"
+                        clientId = "741110853489-3h88ghsg0u7qmjsjs6856g132dt9l5nk.apps.googleusercontent.com"
+                        onSuccess = {responseGoogle}
+                        onFailure = {responseGoogle}
+                    />
+
+                </div>
             </div>
         )
     }
