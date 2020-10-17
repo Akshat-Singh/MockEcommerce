@@ -45,7 +45,10 @@ export default class UserLogin extends Component {
         console.log(user); 
 
         axios.post('http://localhost:5000/users/login', user)
-            .then(res => console.log(res.data)); 
+            .then(res => {
+                sessionStorage.setItem("username", res.data.name);
+                console.log("Session Storage set to: " + sessionStorage.getItem("username")); 
+            }); 
         
         this.setState({
             username: this.state.username,
