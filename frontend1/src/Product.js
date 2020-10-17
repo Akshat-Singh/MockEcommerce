@@ -8,7 +8,16 @@ import axios from "axios";
 function Product({title, price, rating, image, category, reviews, id, description}) {
     function addToCart(e) {
         e.preventDefault();
-        axios.post('http://localhost:5000/users/cart/' + id)  
+        axios.post('http://localhost:5000/users/cart/add/' + id)  
+            .then(res => {
+                console.log(res);  
+            })
+            .catch(err => console.log(err)); 
+    }
+
+    function Wishlist(e) {
+        e.preventDefault();
+        axios.post('http://localhost:5000/users/wishlist/add/' + id)  
             .then(res => {
                 console.log(res);  
             })
@@ -48,7 +57,7 @@ function Product({title, price, rating, image, category, reviews, id, descriptio
             </p>
 
             <button onClick={addToCart}>Add to Cart</button>
-            <button>Wishlist Item</button> 
+            <button onClick={Wishlist}>Wishlist Item</button> 
 
         </div>
     )

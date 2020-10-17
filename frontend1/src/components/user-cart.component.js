@@ -1,5 +1,6 @@
 import React, { Component } from 'react'; 
 import axios from 'axios';
+import Header from '../Header.js'
 
 axios.defaults.baseURL = "";
 axios.defaults.withCredentials = true; 
@@ -24,6 +25,7 @@ export default class UserCart extends Component {
     render() {
         return (
             <div>
+                <Header/>
                 <h1>My Cart</h1>
                 {
                     Object.keys(this.state).map((key, val) => (

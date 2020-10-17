@@ -29,14 +29,14 @@ function Header() {
                         </div>
                     </Link>
     
-                    <Link to =  "/" className = "header__link">
+                    <Link to =  "/users/wishlist" className = "header__link">
     
                         <div className = "header__option">
                             <span className = "header__selection"> Wish List </span>
                         </div>
                     </Link>
     
-                    <Link to =  "/checkout" className = "header__link">
+                    <Link to =  "/users/cart" className = "header__link">
     
                         <div className = "header__option">
                             <span className = "header__selection"> Shopping Cart </span>

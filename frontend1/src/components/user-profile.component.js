@@ -1,5 +1,6 @@
 import React, { Component } from 'react'; 
 import axios from 'axios';
+import Header from '../Header'; 
 
 axios.defaults.baseURL = "";
 axios.defaults.withCredentials = true; 
@@ -25,6 +26,7 @@ export default class UserProfile extends Component {
     render() {
         return (
             <div>
+                <Header/>
                 <h1>Personal Details</h1>
             
                     <form> 
@@ -33,6 +35,11 @@ export default class UserProfile extends Component {
                             <input type="text" placeholder={this.state['name']} disabled="disabled"/>
                             Email
                             <input type="text" placeholder={this.state['email']} disabled="disabled"/>
+                            Password
+                            <input type="password" placeholder="" disabled="disabled"/>
+                            Confirm Password
+                            <input type="password" placeholder="" disabled="disabled"/>
+                            <button>Edit information</button> 
                         </div>
                     </form>
             </div> 

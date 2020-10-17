@@ -54,7 +54,6 @@ router.route('/login')
         /* Extracting values of email and raw password from the JSON object / HTML form */ 
         const email = req.body.email;
         const password = req.body.password;
-        console.log(email); 
         
         /* Look for the email in the database */
         user.findOne({email})
@@ -62,7 +61,6 @@ router.route('/login')
             /* Do not confuse var "user" with var "_user". "user" refers to the local instance of the MongoDB Schema
             while "_user" refers to the result of the findOne operation */ 
             .then(_user => {
-                console.log(_user); 
                 if (!_user)
                     return res.status(400).json("Error: Email Not Found");   
                 
@@ -96,23 +94,6 @@ router.route('/profile')
         /* A GET route triggered as the user information page. */
         if (req.session.user) {
             res.json(req.session.user); 
-
-            
-            /*let email = req.session.user.email;
-
-            userSecondary
-                .findOne({email})
-                .then(_user => {
- 
-                    if (!_user)         
-                        return res.json("Error: Email Not Found");   
-                    else {  
-                        resJSON.push(_user);
-                        console.log(resJSON);
-                        res.json(resJSON);
-                    }
-                })                      
-                .catch(error => res.status(400).json("Error: " + error)); */
         }
         else {
             console.log("Not signed in"); 
@@ -224,7 +205,7 @@ router.route('/signout')
 module.exports = router;
 
 
-router.route('/cart/:id').post((req, res) => {
+router.route('/cart/add/:id').post((req, res) => {
     if (req.session.user) {
         let email = req.session.user.email;
 
@@ -236,6 +217,29 @@ router.route('/cart/:id').post((req, res) => {
                         return res.json("Error: Data Corrupt");   
                     else {  
                         _userData.cart.push(req.params.id);
+                        res.json(req.params.id + ": Item has been successfully added to your cart");
+                        _userData.save(); 
+                    }
+                })                      
+                .catch(error => res.status(400).json("Error: " + error));
+    }
+    else
+        res.json("Error: Not Signed In");
+})
+
+
+router.route('/wishlist/add/:id').post((req, res) => {
+    if (req.session.user) {
+        let email = req.session.user.email;
+
+            userSecondary
+                .findOne({email})
+                .then(_userData => {
+ 
+                    if (!_userData)         
+                        return res.json("Error: Data Corrupt");   
+                    else {  
+                        _userData.wishlist.push(req.params.id);
                         res.json(req.params.id + ": Item has been successfully added to your cart");
                         _userData.save(); 
                     }
