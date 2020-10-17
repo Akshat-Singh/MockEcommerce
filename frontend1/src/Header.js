@@ -42,6 +42,13 @@ function Header() {
                         <span className = "header__selection"> Shopping Cart </span>
                     </div>
                 </Link>
+                
+                <Link to =  "/users/register" className = "header__link">
+
+                    <div className = "header__option">
+                        <span className = "header__selection"> Signup </span>
+                    </div>
+                </Link>
 
             </div>
             

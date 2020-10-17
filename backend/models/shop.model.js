@@ -8,7 +8,9 @@ const shopSchema = new schema({
     cost: {type: Number, required: true},
     totalRatings: {type: Number},
     avgRatings: {type: Number}, 
-    ratings: {type: Array}
+    ratings: {type: Array},
+    imageLink: {type: String}, 
+    category: {type: String}
 }, {
     timestamps: true
 });

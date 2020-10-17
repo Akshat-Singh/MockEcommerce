@@ -1,3 +1,31 @@
 *{
    margin: 0; 
 }
+
+.homepage {
+   display: flex;
+   flex-wrap: wrap;
+   flex-direction: row;
+   
+   
+}
+
+/* .homepage div {
+   flex: 4; 
+   border: 1px #ccc solid;
+   padding: 10px;
+} */
+
+.homepage .product {
+   display: flex;
+   flex: 4; 
+   border: 1px #ccc solid;
+   padding: 10px;
+   margin: 5px;
+   min-width: 200px;
+   max-width: 400px;
+   background-color: rgb(243, 240, 247);  
+   
+   
+   
+}

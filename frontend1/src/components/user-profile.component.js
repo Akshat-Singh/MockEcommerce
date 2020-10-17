@@ -10,10 +10,10 @@ export default class UserProfile extends Component {
         
     }
 
-    componentWillMount() {
+     componentWillMount() {
         axios.get('http://localhost:5000/users/profile')
             .then(res => {
-                const data = (res.data);
+               const data = (res.data);
                 this.setState(res.data); 
                 console.log(this.state); 
 
