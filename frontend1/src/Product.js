@@ -3,7 +3,7 @@ import "./Product.css"
 
 // components: Name, Price, Rating, Image, Catergory, Number of Reviews, UniqueProductID?
 
-function Product({title, price, rating, image, category, reviews, id}) {
+function Product({title, price, rating, image, category, reviews, id, description}) {
     return (
         <div className="product">
             
@@ -35,6 +35,9 @@ function Product({title, price, rating, image, category, reviews, id}) {
             <p className="product_id">
                 {id}
             </p>
+
+            <button>Add to Cart</button>
+            <button>Wishlist Item</button> 
 
         </div>
     )

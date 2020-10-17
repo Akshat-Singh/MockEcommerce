@@ -4,11 +4,11 @@ const { json } = require('express');
 let shop = require('../models/shop.model'); 
 
 /* Trigger the following when "http//www.website.com/users/" is called */
-router.route('/').get((req, res) => {
+router.route('/products').get((req, res) => {
     /* A GET route that returns the list of all users from the MongoDB database */
 
 
-    /* If users are found in the MongoDB */
+    /* If found in the MongoDB */
     shop.find()
 
         /* Return the users you got from the database in JSON format */ 
@@ -21,19 +21,19 @@ router.route('/').get((req, res) => {
 /* Trigger the following if "http//www.website.com/users/add" is called */ 
 router.route('/add').post((req, res) => {
     /* A POST route that adds a user to the database */
-    
-    const itemName = req.body.itemName;
-    const description = req.body.description;
-    const cost = Number(req.body.cost); 
+
 
     const newShop = new shop({
-        itemName, 
-        description, 
-        cost
+        itemName: req.body.itemName, 
+        description: req.body.description, 
+        cost: Number(req.body.cost), 
+        totalRatings: 0,
+        avgRatings: 0,
+        ratings: new Array(), 
+        imageLink: req.body.imgLink, 
+        category: req.body.category
     }); 
 
-    newShop.totalRatings = 0; 
-    newShop.avgRatings = 0; 
     newShop.save()
         .then(() => res.json("Item Added!"))
         .catch(err => res.status(400).json("Error: " + err)); 

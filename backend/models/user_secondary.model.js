@@ -4,11 +4,11 @@ const Schema = mongoose.Schema;
 
 const userSecondarySchema = new Schema({
     email: {type: String, required: true, unique: true},
-    address: {type: String},
-    phone: {type: String},
-    purchases: {type: Array}, 
-    wishlist: {type: Array},
-    cart: {type: Array}
+    address: {type: String, unique: false},
+    phone: {type: String, unique: false},
+    purchases: {type: Array, unique: false}, 
+    wishlist: {type: Array, unique: false},
+    cart: {type: Array, unique: false}
 });
  
 const userSecondary = mongoose.model('userSecondary', userSecondarySchema); 

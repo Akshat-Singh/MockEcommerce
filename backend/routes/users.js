@@ -36,10 +36,10 @@ router.route('/register').post((req, res) => {
                 .then(() => {
                     const dummyStr = "";
                     const dummyArr = new Array();  
-                    
-                    const userData = new userSecondary({email, dummyStr, dummyStr, dummyArr, dummyArr});
+                    const userData = new userSecondary({email: email, address: "", phone: "", purchases: new Array, wishlist: new Array(), cart: new Array()});
                     userData.save()
                             .then(() => {res.json("User Added Successfully!")})
+                            .catch(err => res.json("Error: " + err)); 
                 })
                 .catch(err => res.status(400).json("Error: " + err));    
         }); 
@@ -54,7 +54,7 @@ router.route('/login')
         /* Extracting values of email and raw password from the JSON object / HTML form */ 
         const email = req.body.email;
         const password = req.body.password;
-
+        console.log(email); 
         
         /* Look for the email in the database */
         user.findOne({email})
@@ -62,6 +62,7 @@ router.route('/login')
             /* Do not confuse var "user" with var "_user". "user" refers to the local instance of the MongoDB Schema
             while "_user" refers to the result of the findOne operation */ 
             .then(_user => {
+                console.log(_user); 
                 if (!_user)
                     return res.status(400).json("Error: Email Not Found");   
                 
@@ -94,11 +95,10 @@ router.route('/profile')
     .get((req, res) => {
         /* A GET route triggered as the user information page. */
         if (req.session.user) {
+            res.json(req.session.user); 
 
-            let resJSON = new Array(); 
-            resJSON.push(req.session.user);
             
-            let email = req.session.user.email;
+            /*let email = req.session.user.email;
 
             userSecondary
                 .findOne({email})
@@ -112,9 +112,10 @@ router.route('/profile')
                         res.json(resJSON);
                     }
                 })                      
-                .catch(error => res.status(400).json("Error: " + error));
+                .catch(error => res.status(400).json("Error: " + error)); */
         }
         else {
+            console.log("Not signed in"); 
             res.json("Not signed in!"); 
         }
     })
@@ -168,6 +169,49 @@ router.route('/landing').get((req, res) => {
         res.json(req.session.user); 
     }
 });
+
+
+
+router.route('/wishlist').get((req, res) => {
+    if (req.session.user) {
+        let email = req.session.user.email;
+
+            userSecondary
+                .findOne({email})
+                .then(_userData => {
+ 
+                    if (!_userData)         
+                        return res.json("Error: Data Corrupt");   
+                    else {  
+                        res.json(_userData.wishlist);
+                    }
+                })                      
+                .catch(error => res.status(400).json("Error: " + error));
+    }
+    else
+        res.json("Error: Not Signed In"); 
+});
+
+
+router.route('/cart').get((req, res) => {
+    if (req.session.user) {
+        let email = req.session.user.email;
+
+            userSecondary
+                .findOne({email})
+                .then(_userData => {
+ 
+                    if (!_userData)         
+                        return res.json("Error: Data Corrupt");   
+                    else {  
+                        res.json(_userData.cart);
+                    }
+                })                      
+                .catch(error => res.status(400).json("Error: " + error));
+    }
+    else
+        res.json("Error: Not Signed In");
+})
 
 
 module.exports = router;
