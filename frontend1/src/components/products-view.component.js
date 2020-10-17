@@ -1,14 +1,13 @@
 import React, { Component } from 'react'; 
 import axios from 'axios';
 import Header from "../Header";
-import Product from '../Product.js';
+import Product, {addToCart} from '../Product.js';
 import '../Product.css';
 import '../App.css'; 
 import { useParams } from 'react-router-dom';
 
 export default class ProductsView extends Component{
-
-    
+        
     constructor(props) {
         super(props); 
 
@@ -16,6 +15,7 @@ export default class ProductsView extends Component{
             mdata: [],
         }
     }
+
 
      componentWillMount() { 
         axios.get('http://localhost:5000/shop/products/' + this.props.match.params.id)  

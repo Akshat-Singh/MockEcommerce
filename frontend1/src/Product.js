@@ -1,9 +1,20 @@
 import React from "react"
 import "./Product.css"
+import axios from "axios"; 
 
 // components: Name, Price, Rating, Image, Catergory, Number of Reviews, UniqueProductID?
 
+
 function Product({title, price, rating, image, category, reviews, id, description}) {
+    function addToCart(e) {
+        e.preventDefault();
+        axios.post('http://localhost:5000/users/cart/' + id)  
+            .then(res => {
+                console.log(res);  
+            })
+            .catch(err => console.log(err)); 
+    }
+
     return (
         <div className="product">
             
@@ -36,7 +47,7 @@ function Product({title, price, rating, image, category, reviews, id, descriptio
                 View: <a href={"/products/" + id}>{id}</a>
             </p>
 
-            <button>Add to Cart</button>
+            <button onClick={addToCart}>Add to Cart</button>
             <button>Wishlist Item</button> 
 
         </div>

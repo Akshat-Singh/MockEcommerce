@@ -222,3 +222,26 @@ router.route('/signout')
 
 
 module.exports = router;
+
+
+router.route('/cart/:id').post((req, res) => {
+    if (req.session.user) {
+        let email = req.session.user.email;
+
+            userSecondary
+                .findOne({email})
+                .then(_userData => {
+ 
+                    if (!_userData)         
+                        return res.json("Error: Data Corrupt");   
+                    else {  
+                        _userData.cart.push(req.params.id);
+                        res.json(req.params.id + ": Item has been successfully added to your cart");
+                        _userData.save(); 
+                    }
+                })                      
+                .catch(error => res.status(400).json("Error: " + error));
+    }
+    else
+        res.json("Error: Not Signed In");
+})
