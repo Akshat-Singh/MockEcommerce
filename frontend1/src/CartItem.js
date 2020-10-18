@@ -11,20 +11,20 @@ function WishlistItem({title, price, image, category, id, description}) {
         axios.post('http://localhost:5000/users/cart/delete/' + id)
             axios.post('http://localhost:5000/users/wishlist/add/' + id)  
                 .then(res => {
-                    alert(res);  
+                    alert(JSON.stringify(res.data));  
                     window.location.reload();
                 })
-                .catch(err => alert(err)); 
+                .catch(err => alert(JSON.stringify(err))); 
     }
 
     function deleteFromCart(e) {
         e.preventDefault();
         axios.post('http://localhost:5000/users/cart/delete/' + id)  
             .then(res => {
-                alert(res);  
+                alert(JSON.stringify(res.data));  
                 window.location.reload(); 
             })
-            .catch(err => alert(err)); 
+            .catch(err => alert(JSON.stringify(err))); 
     }
 
     return (

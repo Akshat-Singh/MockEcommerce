@@ -10,18 +10,18 @@ function Product({title, price, rating, image, category, reviews, id, descriptio
         e.preventDefault();
         axios.post('http://localhost:5000/users/cart/add/' + id)  
             .then(res => {
-                alert(res);  
+                alert(JSON.stringify(res.data));  
             })
-            .catch(err => alert(err)); 
+            .catch(err => alert(JSON.stringify(err))); 
     }
 
     function Wishlist(e) {
         e.preventDefault();
         axios.post('http://localhost:5000/users/wishlist/add/' + id)  
             .then(res => {
-                alert(res);  
+                alert(JSON.stringify(res.data));  
             })
-            .catch(err => alert(err)); 
+            .catch(err => alert(JSON.stringify(err))); 
     }
 
     return (

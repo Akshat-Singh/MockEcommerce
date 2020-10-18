@@ -218,7 +218,7 @@ router.route('/cart/add/:id').post((req, res) => {
                     if (!_userData)         
                         return res.json("Error: Data Corrupt");   
                     else {
-                        if (_userData.wishlist.indexOf(req.params.id) > -1)
+                        if (_userData.cart.indexOf(req.params.id) > -1)
                             res.json(req.params.id + ": Item is already in cart");
                         else {  
                             _userData.cart.push(req.params.id);
