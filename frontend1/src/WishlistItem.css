@@ -1,0 +1,18 @@
+.wishlist_item {
+    position: relative; 
+    background: #121212;
+}
+
+.witem_image {
+    height: 10%;
+    width: 10%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    order: 0;
+}
+
+.wishlist {
+    background: #121212;
+    color: #ffffff;
+    font: fantasy;
+}
