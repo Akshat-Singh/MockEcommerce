@@ -3,7 +3,7 @@ import "./Header.css";
 import {Link} from "react-router-dom";
 
 function Header() {
-    if (sessionStorage.getItem("username") !== "") {
+    if (sessionStorage.getItem("username")) {
         return (
             <nav className = "header">
                 
