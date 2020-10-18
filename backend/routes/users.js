@@ -307,3 +307,47 @@ router.route('/cart/delete/:id').post((req, res) => {
     else
         res.json("Error: Not Signed In");
 })
+
+
+router.route('/purchase').get((req, res) => {
+    if (req.session.user) {
+        let email = req.session.user.email; 
+
+        userSecondary.findOne({email})
+            .then(_userData => {
+                if(!_userData)
+                    return res.json("Error: Data Corrupt"); 
+                
+                else {
+                    _userData.purchases = _userData.purchases.concat(_userData.cart); 
+                    _userData.cart = []; 
+                    _userData.save()
+                        .then(() => res.json("Order Placed :)")) 
+                        .catch(err => res.json(err)); 
+                }
+            })
+            .catch(err => res.json(err)); 
+    }
+
+    else
+        res.json("Email Not found!");
+})
+
+router.route('/profile/purchases').get((req, res) => {
+    if (req.session.user) {
+        let email = req.session.user.email; 
+        userSecondary.findOne({email})
+            .then(_userData => {
+                if(!_userData)
+                    return res.json("Error: Data Corrupt"); 
+                
+                else {
+                    res.json(_userData.purchases); 
+                }
+            })
+            .catch(err => res.json(err)); 
+    }
+
+    else
+        res.json("Email Not Found"); 
+})
