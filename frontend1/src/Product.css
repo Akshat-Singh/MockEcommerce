@@ -1,7 +1,5 @@
 
 .product {
-    /* display: flex;
-    flex-direction: column; */
     display: grid;
     grid-template-rows: 1fr 1fr;
     grid-auto-rows: (100px, auto);
@@ -9,20 +7,41 @@
     padding: 10px;
     margin: 5px;
     
-    background-color: rgb(118, 116, 121);   
+    background-color: rgb(61, 60, 63);   
     align-items: center; 
     justify-content: start;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: rgb(255, 250, 242);
 }
 
 /* Sub-grid */
-.secondline {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+
+.firstline {
+    text-align: center;
+    font-size: large;
 }
 
+.secondline {
+    text-align: center;
+}
 
+.thirdline {
+    text-align: center;
+}
+
+.fourthline {
+    text-align: center;
+}
+
+.fifthline {
+    text-align: center;
+}
+
+.sixthline {
+    text-align: center;
+}
+
+/*End of sub-grid. Separate lines in case of future modifications to the CSS sub-grid*/
 
 .product_title {
     margin-bottom: 7.5px;
@@ -57,14 +76,16 @@
 .product > img {
     height: 300px;
     width: 300px;
+    justify-self: center;
     object-fit: cover;
     margin-bottom: 15px;
+    
     /* order: 0; */
 }
 
 /* Background color */
 .product_title, .product_price, .product_rating, .product_price > small, .product_price > strong, .product_category, .product_reviews, .product_id {
-    background-color: rgb(118, 116, 121); 
+    background-color: rgb(61, 60, 63); 
 }
 
 

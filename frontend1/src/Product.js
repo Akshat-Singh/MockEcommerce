@@ -39,26 +39,37 @@ function Product({title, price, rating, image, category, reviews, id, descriptio
                     <strong className="product_price_tag">{price}</strong>
                 </p>
 
-                <p className="product_rating">
-                    {/* Timestamp 2:15 */}
-                    {rating}
 
-                </p>
+                
             </div>
 
             <img src={image} alt="Product Image" className="product_image"/>
 
+            <div className="thirdline">
             <p className="product_category">
-                {category} 
+                    Catergory: <strong>{category}</strong>
             </p>
+            </div>
 
+            <div className="fourthline">
+            <p className="product_rating">
+                    {/* Timestamp 2:15 */}
+                    {rating}/5
+
+            </p>
+            </div>
+
+            <div className="fifthline">
             <p className="product_reviews">
-                {reviews}
+                {reviews} customer(s) have reviewed this product
             </p>
+            </div>
 
+            <div className="sixthline">
             <p className="product_id">
-                View: <a href={"/products/" + id}>{id}</a>
+                Click <a href={"/products/" + id}>here</a> to view
             </p>
+            </div>
 
             <button onClick={addToCart}>Add to Cart</button>
             <button onClick={Wishlist}>Wishlist Item</button> 
