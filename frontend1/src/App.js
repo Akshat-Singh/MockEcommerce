@@ -11,6 +11,7 @@ import UserProfile from "./components/user-profile.component";
 import UserWishlist from "./components/user-wishlist.component";
 import UserCart from "./components/user-cart.component";
 import UserSignout from "./components/user-signout.component"
+import Homepage from "./components/Homepage";
 
 
 import ProductsHome from "./components/products-home.component"; 
@@ -27,7 +28,7 @@ return (
           <Route path = "/checkout">
 
             <h1>
-              Checkout Pagey
+              Checkout Page
             </h1>
             
           </Route> 
@@ -48,11 +49,7 @@ return (
           <Route path = "/">
 
 
-            <Header />
-              <h1>
-                Home page
-                
-              </h1>
+            <Homepage />
             
 
           </Route>
