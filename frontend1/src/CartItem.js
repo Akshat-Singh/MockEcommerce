@@ -6,22 +6,25 @@ import axios from "axios";
 
 
 function WishlistItem({title, price, image, category, id, description}) {
-    function addToCart(e) {
+    function moveToWishlist(e) {
         e.preventDefault();
-        axios.post('http://localhost:5000/users/cart/add/' + id)  
-            .then(res => {
-                console.log(res);  
-            })
-            .catch(err => console.log(err)); 
+        axios.post('http://localhost:5000/users/cart/delete/' + id)
+            axios.post('http://localhost:5000/users/wishlist/add/' + id)  
+                .then(res => {
+                    alert(res);  
+                    window.location.reload();
+                })
+                .catch(err => alert(err)); 
     }
 
-    function Wishlist(e) {
+    function deleteFromCart(e) {
         e.preventDefault();
-        axios.post('http://localhost:5000/users/wishlist/add/' + id)  
+        axios.post('http://localhost:5000/users/cart/delete/' + id)  
             .then(res => {
-                console.log(res);  
+                alert(res);  
+                window.location.reload(); 
             })
-            .catch(err => console.log(err)); 
+            .catch(err => alert(err)); 
     }
 
     return (
@@ -46,8 +49,8 @@ function WishlistItem({title, price, image, category, id, description}) {
                 <strong className="citem_price_tag">{price}</strong>
             </td>
 
-            <td><button onClick={addToCart}>Add to Cart</button>
-            <button onClick={Wishlist}>Wishlist Item</button></td> 
+            <td><button onClick={moveToWishlist}>Move to Wishlist</button>
+            <button onClick={deleteFromCart}>Delete from Cart</button></td> 
 
         </tr>
     )

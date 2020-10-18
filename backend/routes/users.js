@@ -217,10 +217,14 @@ router.route('/cart/add/:id').post((req, res) => {
  
                     if (!_userData)         
                         return res.json("Error: Data Corrupt");   
-                    else {  
-                        _userData.cart.push(req.params.id);
-                        res.json(req.params.id + ": Item has been successfully added to your cart");
-                        _userData.save(); 
+                    else {
+                        if (_userData.wishlist.indexOf(req.params.id) > -1)
+                            res.json(req.params.id + ": Item is already in cart");
+                        else {  
+                            _userData.cart.push(req.params.id);
+                            _userData.save(); 
+                            res.json(req.params.id + ": Item has been successfully added to your cart");
+                        }
                     }
                 })                      
                 .catch(error => res.status(400).json("Error: " + error));
@@ -241,9 +245,61 @@ router.route('/wishlist/add/:id').post((req, res) => {
                     if (!_userData)         
                         return res.json("Error: Data Corrupt");   
                     else {  
-                        _userData.wishlist.push(req.params.id);
-                        res.json(req.params.id + ": Item has been successfully added to your cart");
+                        if (_userData.wishlist.indexOf(req.params.id) > -1)
+                            res.json(req.params.id + ": Item is already in wishlist"); 
+                        else {       
+                            _userData.wishlist.push(req.params.id);
+                            _userData.save();
+                            res.json(req.params.id + ": Item has been successfully added to your cart");
+                        } 
+                    }
+                })                      
+                .catch(error => res.status(400).json("Error: " + error));
+    }
+    else
+        res.json("Error: Not Signed In");
+})
+
+
+router.route('/wishlist/delete/:id').post((req, res) => {
+    if (req.session.user) {
+        let email = req.session.user.email;
+
+            userSecondary
+                .findOne({email})
+                .then(_userData => {
+ 
+                    if (!_userData)         
+                        return res.json("Error: Data Corrupt");   
+                    else {  
+                        let index = _userData.wishlist.indexOf(req.params.id);
+                        _userData.wishlist.splice(index, 1); 
                         _userData.save(); 
+                        res.json(req.params.id + ": Item has been successfully removed from your wishlist");
+                    }
+                })                      
+                .catch(error => res.status(400).json("Error: " + error));
+    }
+    else
+        res.json("Error: Not Signed In");
+})
+
+
+router.route('/cart/delete/:id').post((req, res) => {
+    if (req.session.user) {
+        let email = req.session.user.email;
+
+            userSecondary
+                .findOne({email})
+                .then(_userData => {
+ 
+                    if (!_userData)         
+                        return res.json("Error: Data Corrupt");   
+                    else {  
+                        let index = _userData.cart.indexOf(req.params.id);
+                        _userData.cart.splice(index, 1); 
+                        _userData.save(); 
+                        res.json(req.params.id + ": Item has been successfully removed from your wishlist");   
                     }
                 })                      
                 .catch(error => res.status(400).json("Error: " + error));
