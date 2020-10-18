@@ -61,26 +61,33 @@ export default class ProductsView extends Component{
                         />
         
                 </div>
+                <div className = "login">
+                    <div className = "login__container">
+                        <h3>
+                        Average Rating: {this.state.mdata['avgRatings']} </h3>
+                        
+                        <h3> Total Reviews: {this.state.mdata['totalRatings']}  </h3>
+                    
 
-                <div className="rating">
-                    Average Rating: {this.state.mdata['avgRatings']}
-                    Total Reviews: {this.state.mdata['totalRatings']}  
-                </div> 
+                    
+                        Your rating
+                        <form onSubmit={this.submitRating}>
+                            <select className = "login__submit" onChange={this.onChangeRating}>
+                                <option value="0" selected={true} disabled={true}>0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <button className = "login__submit" type="submit">Submit Rating</button>
+                        </form> 
 
-                <div className="rate">
-                    Your rating
-                    <form onSubmit={this.submitRating}>
-                        <select onChange={this.onChangeRating}>
-                            <option value="0" selected={true} disabled={true}>0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                        <button type="submit">Submit Rating</button>
-                    </form> 
-                </div> 
+                    </div>
+
+                </div>
+                    
+
             </div>
         )
     }
