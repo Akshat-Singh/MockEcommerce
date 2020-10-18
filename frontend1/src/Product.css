@@ -1,12 +1,15 @@
-/* .product_rating {
-    display: flex;
-} */
 
 .product {
-    display: flex;
-    flex-direction: column;
-    max-height: 400px;
-    min-width: 200px;
+    /* display: flex;
+    flex-direction: column; */
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-auto-rows: (100px, auto);
+    border: 1px #ccc solid;
+    padding: 10px;
+    margin: 5px;
+    
+    background-color: rgb(118, 116, 121);   
     align-items: center; 
     justify-content: start;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -15,40 +18,40 @@
 
 .product_title {
     margin-bottom: 7.5px;
-    order: 0;
+    /* order: 0; */
 }
 
 .product_price {
     margin-bottom: 7.5px;
-    order: 0;
+    /* order: 0; */
 }
 
 .product_rating {
     margin-bottom: 7.5px;
-    order: 0;
+    /* order: 0; */
 }
 
 .product_category {
     margin-bottom: 7.5px;
-    order: 0;
+    /* order: 0; */
 }
 
 .product_reviews {
     margin-bottom: 7.5px;
-    order: 0;
+    /* order: 0; */
 }
 
 .product_id {
     margin-bottom: 7.5px;
-    order: 0;
+    /* order: 0; */
 }
 
 .product > img {
-    height: 150px;
-    width: 150px;
+    height: 300px;
+    width: 300px;
     object-fit: cover;
     margin-bottom: 15px;
-    order: 0;
+    /* order: 0; */
 }
 
 /* Background color */

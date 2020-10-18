@@ -27,7 +27,7 @@ return (
           <Route path = "/checkout">
 
             <h1>
-              Checkout Page
+              Checkout Pagey
             </h1>
             
           </Route> 

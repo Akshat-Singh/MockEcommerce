@@ -16,15 +16,17 @@
    padding: 10px;
 } */
 
-.homepage .product {
-   display: flex;
-   flex: 4; 
+/* .homepage .product {
+   /* display: flex;
+   flex: 4;  */
+   /* display: grid;
+   grid-template-rows: 1fr 1fr;
    border: 1px #ccc solid;
    padding: 10px;
    margin: 5px;
    min-width: 200px;
    max-width: 400px;
-   background-color: rgb(118, 116, 121);   
+   background-color: rgb(118, 116, 121);    
+   margin: 5px;
    
-   
-}
+} */
