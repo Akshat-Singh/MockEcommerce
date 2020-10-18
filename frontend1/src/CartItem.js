@@ -5,7 +5,7 @@ import axios from "axios";
 // components: Name, Price, Image, Catergory, UniqueProductID?
 
 
-function WishlistItem({title, price, image, category, id, description}) {
+function CartItem({title, price, image, category, id, description}) {
     function moveToWishlist(e) {
         e.preventDefault();
         axios.post('http://localhost:5000/users/cart/delete/' + id)
@@ -56,4 +56,4 @@ function WishlistItem({title, price, image, category, id, description}) {
     )
 }
 
-export default WishlistItem  
+export default CartItem  

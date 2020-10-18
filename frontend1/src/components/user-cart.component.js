@@ -1,7 +1,7 @@
 import React, { Component } from 'react'; 
 import axios from 'axios';
 import Header from '../Header'; 
-import WishlistItem from '../CartItem.js'
+import CartItem from '../CartItem.js'
 import '../CartItem.css'
 
 axios.defaults.baseURL = "";
@@ -14,8 +14,11 @@ export default class UserCart extends Component {
 
         this.state = {
             mdata: [],
-            data: {}
+            data: {},
+            totalCost: 0
         } 
+
+        this.placeOrder = this.placeOrder.bind(this);
     }
 
     componentWillMount() {
@@ -29,11 +32,25 @@ export default class UserCart extends Component {
                     .then(res_i => {
                         console.log(res_i.data); 
                         this.setState({mdata: res_i.data}); 
+
+                        let totalPrice = 0; 
+                        for (var param in res_i.data) {
+                            totalPrice += res_i.data[param].cost;
+                        }
+
+                        this.setState({totalCost: totalPrice}); 
+                        console.log(totalPrice); 
                     })
+
             })
             .catch(err => console.log(err)); 
     }    
    
+    placeOrder(e) {
+        e.preventDefault();     
+        alert("Yayy! Your order has been placed!");
+    }
+
     render() {
         return (
             <div class="cart">
@@ -42,7 +59,7 @@ export default class UserCart extends Component {
                 <div>
                     <table>
                         {this.state.mdata.map((data, index) => ( 
-                            <WishlistItem 
+                            <CartItem 
                                 title = {data['itemName']}
                                 description = {data.description}
                                 price = {data.cost}
@@ -51,7 +68,16 @@ export default class UserCart extends Component {
                                 id = {data._id}
                             />
                         ))}
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Total Cost</td>
+                            <td>₹{this.state.totalCost}</td>
+                            <td><button onClick={this.placeOrder}>Place Order</button></td> 
+                        </tr>
                     </table>
+                    
                 </div>
             </div> 
         )
