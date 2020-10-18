@@ -18,10 +18,6 @@ export default class UserWishlist extends Component {
         } 
     }
 
-    state = {
-        
-    }
-
     componentWillMount() {
         axios.get('http://localhost:5000/users/wishlist')
             .then(res => {
