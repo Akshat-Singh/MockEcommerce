@@ -48,7 +48,12 @@ export default class UserCart extends Component {
    
     placeOrder(e) {
         e.preventDefault();     
-        alert("Yayy! Your order has been placed!");
+
+        axios.get('http://localhost:5000/users/purchase')
+            .then(res => {
+                alert(JSON.stringify(res.data)); 
+            })
+            .catch(err => console.log(err)); 
     }
 
     render() {

@@ -319,11 +319,16 @@ router.route('/purchase').get((req, res) => {
                     return res.json("Error: Data Corrupt"); 
                 
                 else {
-                    _userData.purchases = _userData.purchases.concat(_userData.cart); 
-                    _userData.cart = []; 
-                    _userData.save()
-                        .then(() => res.json("Order Placed :)")) 
-                        .catch(err => res.json(err)); 
+                    if (_userData.cart && _userData.cart.length) {
+                        _userData.purchases = _userData.purchases.concat(_userData.cart); 
+                        _userData.cart = []; 
+                        _userData.save()
+                            .then(() => res.json("Order Placed :)")) 
+                            .catch(err => res.json(err)); 
+                    }
+                    else {
+                        return res.json("Your Cart is Empty!!"); 
+                    }
                 }
             })
             .catch(err => res.json(err)); 
