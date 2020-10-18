@@ -26,21 +26,25 @@ function Product({title, price, rating, image, category, reviews, id, descriptio
 
     return (
         <div className="product">
-            
-            <p className="product_title">
-                {title}
-            </p>
 
-            <p className="product_price">
-                <small>₹</small>
-                <strong className="product_price_tag">{price}</strong>
-            </p>
+            <div className="firstline">
+                <p className="product_title">
+                    {title}
+                </p>
+            </div>
 
-            <p className="product_rating">
-                {/* Timestamp 2:15 */}
-                {rating}
+            <div className="secondline">
+                <p className="product_price">
+                    <small>₹</small>
+                    <strong className="product_price_tag">{price}</strong>
+                </p>
 
-            </p>
+                <p className="product_rating">
+                    {/* Timestamp 2:15 */}
+                    {rating}
+
+                </p>
+            </div>
 
             <img src={image} alt="Product Image" className="product_image"/>
 

@@ -16,6 +16,14 @@
     color: rgb(255, 250, 242);
 }
 
+/* Sub-grid */
+.secondline {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+
+
 .product_title {
     margin-bottom: 7.5px;
     /* order: 0; */
