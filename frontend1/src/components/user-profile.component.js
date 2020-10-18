@@ -1,7 +1,8 @@
 import React, { Component } from 'react'; 
 import axios from 'axios';
 import Header from '../Header'; 
-import {Redirect} from "react-router-dom"
+import {Redirect} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 
 axios.defaults.baseURL = "";
@@ -92,23 +93,44 @@ export default class UserProfile extends Component {
             return <Redirect to='/users/profile'/> 
 
         return (
-            <div>
-                <Header/>
-                <h1>Personal Details</h1>
             
+            <div class = "login">
+
+                {/* Logo */}
+                <Link to = "/">
+
+                     <img className = "login__logo" src = "http://pngimg.com/uploads/wordpress/wordpress_PNG43.png" alt = "" />
+
+                </Link> 
+
+                <div className = "login__container">
+                    <h1>Personal Details</h1>
+                
                     <form onSubmit={this.updateProfile}> 
+
+                        <h5>
                             Name
-                            <input type="text" defaultValue={this.state['name']} disabled={(this.state['formFieldsDisabled'])} onChange={this.onChangeName}/>
+                        </h5>
+                                
+                        <input type="text" defaultValue={this.state['name']} disabled={(this.state['formFieldsDisabled'])} onChange={this.onChangeName}/>
+                        <h5>
                             Email
-                            <input type="text" defaultValue={this.state['email']} disabled={(this.state['formFieldsDisabled'])} onChange={this.onChangeUsername}/>
+                        </h5>
+                        <input type="text" defaultValue={this.state['email']} disabled={(this.state['formFieldsDisabled'])} onChange={this.onChangeUsername}/>
+                        <h5>
                             Password
-                            <input type="password" placeholder="Leave blank if you do not wish to change" defaultValue="" disabled={(this.state['formFieldsDisabled'])}
-                                    onChange={this.onChangePassword}/>
+                        </h5>
+                        <input type="password" placeholder="Leave blank if you do not wish to change" defaultValue="" disabled={(this.state['formFieldsDisabled'])}
+                                        onChange={this.onChangePassword}/>
+                        <h5>
                             Confirm Password
-                            <input type="password" defaultValue="" disabled={(this.state['formFieldsDisabled'])} onChange={this.onChangeConfirmPassword}/>
-                            <button onClick={this.enableAndEdit}>Edit information</button> 
-                            <button type="submit" hidden={this.state['formFieldsDisabled']}>Submit Updated Information</button> 
+                        </h5>
+                        <input type="password" defaultValue="" disabled={(this.state['formFieldsDisabled'])} onChange={this.onChangeConfirmPassword}/>
+                        <button className = "login__submit" onClick={this.enableAndEdit}>Edit information</button> 
+                        <button className = "login__submit" type="submit" hidden={this.state['formFieldsDisabled']}>Submit Updated Information</button> 
                     </form>
+
+                </div>
             </div> 
         )
     }
