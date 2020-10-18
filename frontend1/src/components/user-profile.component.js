@@ -93,43 +93,45 @@ export default class UserProfile extends Component {
             return <Redirect to='/users/profile'/> 
 
         return (
-            
-            <div class = "login">
+            <div>
+                <Header/>
+                <div class = "login">
 
-                {/* Logo */}
-                <Link to = "/">
+                    {/* Logo */}
+                    <Link to = "/">
 
-                     <img className = "login__logo" src = "http://pngimg.com/uploads/wordpress/wordpress_PNG43.png" alt = "" />
+                        <img className = "login__logo" src = "http://pngimg.com/uploads/wordpress/wordpress_PNG43.png" alt = "" />
 
-                </Link> 
+                    </Link> 
 
-                <div className = "login__container">
-                    <h1>Personal Details</h1>
-                
-                    <form onSubmit={this.updateProfile}> 
+                    <div className = "login__container">
+                        <h1>Personal Details</h1>
+                    
+                        <form onSubmit={this.updateProfile}> 
 
-                        <h5>
-                            Name
-                        </h5>
-                                
-                        <input type="text" defaultValue={this.state['name']} disabled={(this.state['formFieldsDisabled'])} onChange={this.onChangeName}/>
-                        <h5>
-                            Email
-                        </h5>
-                        <input type="text" defaultValue={this.state['email']} disabled={(this.state['formFieldsDisabled'])} onChange={this.onChangeUsername}/>
-                        <h5>
-                            Password
-                        </h5>
-                        <input type="password" placeholder="Leave blank if you do not wish to change" defaultValue="" disabled={(this.state['formFieldsDisabled'])}
-                                        onChange={this.onChangePassword}/>
-                        <h5>
-                            Confirm Password
-                        </h5>
-                        <input type="password" defaultValue="" disabled={(this.state['formFieldsDisabled'])} onChange={this.onChangeConfirmPassword}/>
-                        <button className = "login__submit" onClick={this.enableAndEdit}>Edit information</button> 
-                        <button className = "login__submit" type="submit" hidden={this.state['formFieldsDisabled']}>Submit Updated Information</button> 
-                    </form>
+                            <h5>
+                                Name
+                            </h5>
+                                    
+                            <input type="text" defaultValue={this.state['name']} disabled={(this.state['formFieldsDisabled'])} onChange={this.onChangeName}/>
+                            <h5>
+                                Email
+                            </h5>
+                            <input type="text" defaultValue={this.state['email']} disabled={(this.state['formFieldsDisabled'])} onChange={this.onChangeUsername}/>
+                            <h5>
+                                Password
+                            </h5>
+                            <input type="password" placeholder="Leave blank if you do not wish to change" defaultValue="" disabled={(this.state['formFieldsDisabled'])}
+                                            onChange={this.onChangePassword}/>
+                            <h5>
+                                Confirm Password
+                            </h5>
+                            <input type="password" defaultValue="" disabled={(this.state['formFieldsDisabled'])} onChange={this.onChangeConfirmPassword}/>
+                            <button className = "login__submit" onClick={this.enableAndEdit}>Edit information</button> 
+                            <button className = "login__submit" type="submit" hidden={this.state['formFieldsDisabled']}>Submit Updated Information</button> 
+                        </form>
 
+                    </div>
                 </div>
             </div> 
         )

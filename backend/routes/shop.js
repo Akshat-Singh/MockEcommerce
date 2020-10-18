@@ -1,5 +1,7 @@
 const router = require('express').Router(); 
 const { json } = require('express');
+const mongoose = require('mongoose');
+
 /* Calling the mongoose model we just created */
 let shop = require('../models/shop.model'); 
 
@@ -122,7 +124,18 @@ router.route('/products/:id/rating')
     });
 
 
-router.route('/:id/')
+router.route('/getProducts')
+    .post((req, res) => {
+        let list = new Array(); 
+        for (const param in req.body.data) {
+            list.push(mongoose.Types.ObjectId(req.body.data[param])); 
+        }
+
+        shop.find({'_id': { $in: list}})
+            .then(_item => res.json(_item))
+            .catch(err => res.json(err));  
+
+    })
 
 
 module.exports = router;
