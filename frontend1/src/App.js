@@ -17,6 +17,8 @@ import Homepage from "./components/Homepage";
 import ProductsHome from "./components/products-home.component"; 
 import ProductsView from "./components/products-view.component";
 
+import Autocomplete from "./components/Autocomplete.js";
+
 axios.defaults.withCredentials = true; 
 
 function App() {
@@ -41,19 +43,20 @@ return (
           <Route path="/users/signout" component={UserSignout}/>
           <Route path="/products/:id" component={ProductsView}/> 
           <Route path = "/products" component={ProductsHome}/>    
+          <Route path="/testsearch" component={Autocomplete}> <Autocomplete /> </Route>
           
           
           {/* ----------------------------------------------- */}
-
+          <Route path = "/withNavbar">
+            <Header/>
+            <Homepage />
+          </Route>
+          
+        
           {/* Default path */}
           <Route path = "/">
-
-
             <Homepage />
-            
-
           </Route>
-
           
           {/* ----------------------------------------------- */}
 

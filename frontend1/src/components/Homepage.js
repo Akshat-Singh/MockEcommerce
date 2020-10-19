@@ -15,7 +15,7 @@ function Homepage() {
           <h3 className="masthead-brand">Computer Parts Store</h3>
           <nav className="nav nav-masthead justify-content-center">
             <Link className="nav-link active" to ="/">Home</Link>
-            <Link className="nav-link" to ="#">Features</Link>
+            <Link className="nav-link" to ="/withNavbar">Display Navigation Bar</Link>
             <Link className="nav-link" to ="#">Contact</Link>
           </nav>
         </div>

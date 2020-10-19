@@ -66,7 +66,7 @@ export default class UserLogin extends Component {
                   {/* Logo */}
                 <Link to = "/">
 
-                     <img className = "login__logo" src = "http://pngimg.com/uploads/wordpress/wordpress_PNG43.png" alt = "" />
+                     <img className = "login__logo" src = "https://res.cloudinary.com/duzmuxrsw/image/upload/v1603088411/APLogo_tf5axm.png" alt = "" />
 
                 </Link>
 
