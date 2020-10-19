@@ -29,29 +29,29 @@ function WishlistItem({title, price, image, category, id, description}) {
     }
 
     return (
-        <tr className="wishlist_item">
+        <tr className="cart_item">
             
-            <img src={image} className="witem_image"/>
+            <img src={image} className="citem_image"/>
 
-            <td className="witem_id">
-                View: <a href={"/products/" + id}>{id}</a>
+            <td className="citem_id">
+                <h5> View: <a href={"/products/" + id}>{id}</a> </h5>
             </td>
 
-            <td className="witem_title">
-                {title}
+            <td className="citem_title">
+                <h5> {title} </h5>
             </td>
 
-            <td className="witem_category">
-                {category} 
+            <td className="citem_category">
+                <h5> {category} </h5>
             </td>
 
-            <td className="witem_price">
-                <small>₹</small>
-                <strong className="witem_price_tag">{price}</strong>
+            <td className="citem_price">
+                <h6><small>₹</small>
+                <strong className="citem_price_tag">{price}</strong> </h6>
             </td>
 
-            <td><button onClick={moveToCart}>Move to Cart</button>
-            <button onClick={deleteFromWishlist}>Delete from Wishlist</button></td> 
+            <td><button className = "btn btn-primary btn-sm" onClick={moveToCart}>Move to Cart</button>
+            <button className = "btn btn-primary btn-sm" onClick={deleteFromWishlist}>Delete from Wishlist</button></td> 
 
         </tr>
     )

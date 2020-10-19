@@ -36,11 +36,10 @@ export default class UserWishlist extends Component {
    
     render() {
         return (
-            <div class="wishlist">
+            <div>
                 <Header/>
-                <h1>My Wishlist</h1>
-                <div>
-                    <table>
+                <div className = "cart">
+                    <table className = "cart__table">
                         {this.state.mdata.map((data, index) => ( 
                             <WishlistItem 
                                 title = {data['itemName']}
@@ -51,6 +50,16 @@ export default class UserWishlist extends Component {
                                 id = {data._id}
                             />
                         ))}
+
+                        <tr>
+                            <td></td> 
+                            <td></td>
+                            <td className = "totalcost"> <h3> Total Cost </h3></td>
+                            <td> </td> 
+                            <td className = "totalmoney"> <h3> ₹{this.state.totalCost} </h3></td>
+                            <td className = "placeorder"> <button className = "btn btn-primary" onClick={this.placeOrder}>Place Order</button> </td> 
+                        </tr>
+
                     </table>
                 </div>
             </div> 
