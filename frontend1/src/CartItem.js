@@ -28,31 +28,35 @@ function CartItem({title, price, image, category, id, description}) {
     }
 
     return (
+        
+
         <tr className="cart_item">
             
             <img src={image} className="citem_image"/>
 
             <td className="citem_id">
-                View: <a href={"/products/" + id}>{id}</a>
+               <h5> View: <a href={"/products/" + id}>{id}</a> </h5> 
             </td>
 
             <td className="citem_title">
-                {title}
+               <h5> {title} </h5> 
             </td>
 
             <td className="citem_category">
-                {category} 
+               <h5> {category} </h5> 
             </td>
 
             <td className="citem_price">
-                <small>₹</small>
-                <strong className="citem_price_tag">{price}</strong>
+                <h9> <small>₹</small>
+                <strong className="citem_price_tag">{price}</strong> </h9>
             </td>
 
-            <td><button onClick={moveToWishlist}>Move to Wishlist</button>
-            <button onClick={deleteFromCart}>Delete from Cart</button></td> 
+            <td><button className = "btn btn-primary btn-sm" onClick={moveToWishlist}>Move to Wishlist</button> 
+            <button className = "btn btn-primary btn-sm" onClick={deleteFromCart}>Delete from Cart</button></td> 
 
         </tr>
+
+
     )
 }
 

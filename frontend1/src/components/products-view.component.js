@@ -46,7 +46,9 @@ export default class ProductsView extends Component{
     render() {
         return (
             <div> 
-                <Header/>
+
+                <Header />
+                
                 <div className="homepage">
                     
                         <Product 
