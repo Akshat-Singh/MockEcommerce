@@ -1,10 +1,9 @@
 import React, { Component } from 'react'; 
 import axios from 'axios';
 import Header from "../Header";
-import Product, {addToCart} from '../Product.js';
+import Product from '../Product.js';
 import '../Product.css';
 import '../App.css'; 
-import { useParams } from 'react-router-dom';
 
 export default class ProductsView extends Component{
         
@@ -13,7 +12,8 @@ export default class ProductsView extends Component{
 
         this.state = {
             mdata: [],
-            rating: ''
+            rating: '', 
+            ratingsArray: []
         }
 
         this.onChangeRating = this.onChangeRating.bind(this); 
@@ -36,7 +36,7 @@ export default class ProductsView extends Component{
      componentWillMount() { 
         axios.get('http://localhost:5000/shop/products/' + this.props.match.params.id)  
             .then(res => {
-                this.setState({mdata: res.data}); 
+                this.setState({mdata: res.data, ratingsArray: res.data.ratings}); 
                 console.log(this.state); 
             })
             .catch(err => console.log(err)); 
@@ -50,7 +50,7 @@ export default class ProductsView extends Component{
                 <Header />
                 
                 <div className="homepage">
-                    
+                    <div>
                         <Product 
                             title = {this.state.mdata['itemName']}
                             description = {this.state.mdata.description}
@@ -61,12 +61,22 @@ export default class ProductsView extends Component{
                             category = {this.state.mdata.category}
                             id = {this.state.mdata._id}
                         />
-        
+                    </div>
+                    <div style={{color: "white"}}>
+                    <h1> Individual Ratings </h1> 
+                    <table>
+                        {this.state.ratingsArray.map((data, index) => (
+                            <tr>
+                                <td>{data.email}</td>
+                                <td>{data.rating}</td>
+                            </tr> 
+                        ))}
+                    </table>
+                </div>            
                 </div>
                 <div className = "login">
                     <div className = "login__container">
-                        <h3>
-                        Average Rating: {this.state.mdata['avgRatings']} </h3>
+                        <h3> Average Rating: {this.state.mdata['avgRatings']} </h3>
                         
                         <h3> Total Reviews: {this.state.mdata['totalRatings']}  </h3>
                     
@@ -87,8 +97,7 @@ export default class ProductsView extends Component{
 
                     </div>
 
-                </div>
-                    
+                </div>      
 
             </div>
         )

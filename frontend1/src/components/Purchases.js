@@ -1,5 +1,4 @@
 import React from "react"
-import axios from "axios"; 
 
 // components: Name, Price, Image, Catergory, UniqueProductID?
 
@@ -8,7 +7,7 @@ function Purchase({title, price, image, category, id, description}) {
     return (
         <tr className="purchased_item">
             
-            <img src={image} className="pitem_image"/>
+            <img src={image} alt="Product" className="pitem_image"/>
 
             <td className="pitem_id">
                 View: <a href={"/products/" + id}>{id}</a>

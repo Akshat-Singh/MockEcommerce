@@ -1,6 +1,5 @@
 import React from 'react'
 import "./Header.css";
-import product_data from './components/products_data';
 import {Link} from "react-router-dom";
 import axios from 'axios'; 
 
@@ -81,11 +80,11 @@ export default class Header extends React.Component{
         
                     {/* Search bar */}
                 
-                        <div class="" width="450px" style={{color: "#90ABDC"}}> 
+                        <div width="450px" style={{color: "#90ABDC"}}> 
                             <input 
                                 style={{width: "750px"}} 
                                 placeholder="Search here for products or brands" 
-                                autocomplete="off"
+                                autoComplete="off"
                                 id="query" 
                                 onChange={this.onTextChange}
                                 value={text}/>
