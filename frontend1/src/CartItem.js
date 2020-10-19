@@ -47,8 +47,8 @@ function CartItem({title, price, image, category, id, description}) {
             </td>
 
             <td className="citem_price">
-                <h9> <small>₹</small>
-                <strong className="citem_price_tag">{price}</strong> </h9>
+                <h6> <small>₹</small>
+                <strong className="citem_price_tag">{price}</strong> </h6>
             </td>
 
             <td><button className = "btn btn-primary btn-sm" onClick={moveToWishlist}>Move to Wishlist</button> 
