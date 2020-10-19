@@ -61,7 +61,6 @@ export default class UserCart extends Component {
         return (
             <div>
                 <Header/>
-                <h1>My Cart</h1>
                 <div className = "cart">
                     <table className = "cart__table">
                         {this.state.mdata.map((data, index) => ( 
