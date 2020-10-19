@@ -1,22 +1,45 @@
+.cart__table{
+    margin: 0px; 
+}
+
 .cart_item {
     position: relative; 
     background: #121212;
 }
 
 .citem_image {
-    padding: 5px;
-    width: 350px;
     height: 300px;
-      
+    width: 350px;
+    object-fit: cover;
+    margin-bottom: 40px;
+    margin-top: 30px; 
+    margin-left: 20px; 
+    margin-right: 20px; 
 }
 
 .cart {
     background: #121212;
     color: #ffffff;
-    font: fantasy;
-    font-weight: 100;
+    font: sans-serif;
+    font-weight: 50;
 }
 
-.btn .btn-primary{
-    align-items: center;
+.citem_id .citem_title .citem_price .citem_category {
+    margin-left: 20px; 
+    margin-right: 20px;
+    word-wrap: break-word; 
 }
+
+tr {
+    outline: thin-solid; 
+    outline-color: white; 
+}
+
+.placeorder{
+    text-align: center;
+}
+
+.totalcost {
+    text-align: center;
+}
+
