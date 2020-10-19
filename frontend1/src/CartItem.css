@@ -4,10 +4,10 @@
 }
 
 .citem_image {
-    height: 40%;
-    width: 40%;
-    object-fit: cover;
-    margin-bottom: 40px;
+    padding: 5px;
+    width: 350px;
+    height: 300px;
+      
 }
 
 .cart {
@@ -15,4 +15,8 @@
     color: #ffffff;
     font: fantasy;
     font-weight: 100;
+}
+
+.btn .btn-primary{
+    align-items: center;
 }
