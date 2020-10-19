@@ -43,7 +43,7 @@ function Product({title, price, rating, image, category, reviews, id, descriptio
                 
             </div>
 
-            <img src={image} alt="Product Image" className="product_image"/>
+            <img src={image} alt="Product" className="product_image"/>
 
             <div className="thirdline">
             <p className="product_category">

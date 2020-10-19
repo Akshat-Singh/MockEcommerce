@@ -32,7 +32,7 @@ function CartItem({title, price, image, category, id, description}) {
 
         <tr className="cart_item">
             
-            <img src={image} className="citem_image"/>
+            <img src={image} alt="Product" className="citem_image"/>
 
             <td className="citem_id">
                <h5> View: <a href={"/products/" + id}>{id}</a> </h5> 

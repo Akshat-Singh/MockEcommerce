@@ -35,7 +35,7 @@ export default class UserPurchases extends Component {
    
     render() {
         return (
-            <div class="purchases">
+            <div className="purchases">
                 <Header/>
                 <h1>My Purchases</h1>
                 <div>
