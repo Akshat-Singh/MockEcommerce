@@ -74,12 +74,12 @@ export default class UserCart extends Component {
                             />
                         ))}
                         <tr>
+                            <td></td> 
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td> <h5> Total Cost </h5></td>
-                            <td> <h5> ₹{this.state.totalCost} </h5></td>
-                            <td><button className = "btn btn-primary" onClick={this.placeOrder}>Place Order</button></td> 
+                            <td className = "totalcost"> <h3> Total Cost </h3></td>
+                            <td> </td> 
+                            <td className = "totalmoney"> <h3> ₹{this.state.totalCost} </h3></td>
+                            <td className = "placeorder"> <button className = "btn btn-primary" onClick={this.placeOrder}>Place Order</button> </td> 
                         </tr>
                     </table>
                     
