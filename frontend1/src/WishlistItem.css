@@ -16,3 +16,8 @@
     color: #ffffff;
     font: fantasy;
 }
+
+.citem_id .citem_title .citem_category .citem_price{
+    text-align: center;
+}
+

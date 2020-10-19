@@ -4,15 +4,15 @@
 }
 
 .citem_image {
-    height: 10%;
-    width: 10%;
+    height: 40%;
+    width: 40%;
     object-fit: cover;
-    margin-bottom: 15px;
-    order: 0;
+    margin-bottom: 40px;
 }
 
 .cart {
     background: #121212;
     color: #ffffff;
     font: fantasy;
+    font-weight: 100;
 }

@@ -59,11 +59,11 @@ export default class UserCart extends Component {
 
     render() {
         return (
-            <div class="cart">
+            <div>
                 <Header/>
                 <h1>My Cart</h1>
-                <div>
-                    <table>
+                <div className = "cart">
+                    <table className = "cart__table">
                         {this.state.mdata.map((data, index) => ( 
                             <CartItem 
                                 title = {data['itemName']}
@@ -78,9 +78,9 @@ export default class UserCart extends Component {
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td>Total Cost</td>
-                            <td>₹{this.state.totalCost}</td>
-                            <td><button onClick={this.placeOrder}>Place Order</button></td> 
+                            <td> <h5> Total Cost </h5></td>
+                            <td> <h5> ₹{this.state.totalCost} </h5></td>
+                            <td><button className = "btn btn-primary" onClick={this.placeOrder}>Place Order</button></td> 
                         </tr>
                     </table>
                     
