@@ -1,0 +1,31 @@
+.purchase {
+    position: relative; 
+    background: #121212;
+}
+
+.pitem_image {
+    height: 10%;
+    width: 10%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    order: 0;
+}
+
+.purchases {
+    background: #121212;
+    color: #ffffff;
+    font: fantasy;
+}
+
+.pitem_id .pitem_title .pitem_category .pitem_price{
+    text-align: center;
+}
+
+.pitem_image{
+    width: 10%;
+}
+
+.cart_item{
+    text-align: center;
+}
+
