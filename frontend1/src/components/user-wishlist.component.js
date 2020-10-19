@@ -51,14 +51,6 @@ export default class UserWishlist extends Component {
                             />
                         ))}
 
-                        <tr>
-                            <td></td> 
-                            <td></td>
-                            <td className = "totalcost"> <h3> Total Cost </h3></td>
-                            <td> </td> 
-                            <td className = "totalmoney"> <h3> ₹{this.state.totalCost} </h3></td>
-                            <td className = "placeorder"> <button className = "btn btn-primary" onClick={this.placeOrder}>Place Order</button> </td> 
-                        </tr>
 
                     </table>
                 </div>
