@@ -22,8 +22,8 @@ function Homepage() {
       </header>
 
       <main role="main" className="inner cover">
-        <h1 className="cover-heading"> We sell computer parts.</h1>
-        <p className="lead">Buy nice computer parts for your computer. Computers need computer parts. We sell computer parts.</p>
+        <h1 className="cover-heading"> One-stop shop for your PC needs.</h1>
+        <p className="lead">CPUs, GPUs, Monitors, and more.</p>
         <p className="lead">
             <Link to = "/products">
                 <Button variant="light">Products </Button> &nbsp;
