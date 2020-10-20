@@ -7,7 +7,8 @@ import Product from '../Product.js';
 import '../components/product-view.component.css'
 
 export default class ProductsView extends Component{
-        
+    /* Displays the specific page for a product */     
+    
     constructor(props) {
         super(props); 
 
@@ -22,10 +23,12 @@ export default class ProductsView extends Component{
     }
 
     onChangeRating(e) {
+        /* Trigger when the rating options is changed */
         this.setState({rating: e.target.value});
     }
 
     submitRating(e) {
+        /* Trigger when the submit button is clicked */
         e.preventDefault();
         axios.post('http://localhost:5000/shop/products/' + this.props.match.params.id + '/rating', {"yourRating": this.state.rating})
             .then(res => {
@@ -35,6 +38,7 @@ export default class ProductsView extends Component{
     }
 
      componentWillMount() { 
+        /* Trigger before the frontend is mounted on the screen */ 
         axios.get('http://localhost:5000/shop/products/' + this.props.match.params.id)  
             .then(res => {
                 this.setState({mdata: res.data, ratingsArray: res.data.ratings}); 
@@ -45,15 +49,15 @@ export default class ProductsView extends Component{
 
     
     render() {
+        /* Front-end mounting */ 
         return (
             <div> 
 
                 <Header />
                 <div className="productViewWrapper">
-
                     <div className="productActual">
                         <div>
-                            <Product 
+                            <Product {/* JSX boilerplate that plugs in value from the db to the Product component */}
                                 title = {this.state.mdata['itemName']}
                                 description = {this.state.mdata.description}
                                 price = {this.state.mdata.cost}
@@ -66,7 +70,7 @@ export default class ProductsView extends Component{
                         </div>
                     </div>
                       
-
+                    {/* Code to print people's ratings using a boiler plate plug and play code */}
                     <div className="ratings"/*style={{color: "blue"}}*/>
                         <h1>Here's how others rated this product:</h1> 
                         <table>
@@ -79,15 +83,14 @@ export default class ProductsView extends Component{
                         </table>
                     </div>            
                     
-
+                    
+                    {/* Prints a form to allow the user to rate a product */}
                     <div className = "review">
                         <div className = "review__container">
                             <h3> Average Rating: {this.state.mdata['avgRatings']}/5 </h3>
                             
                             <h3> Total Reviews: {this.state.mdata['totalRatings']}  </h3>
-                        
-
-                        
+                                                
                             <p>Your rating:</p>
                             <form onSubmit={this.submitRating}>
                                 <select className = "__submit" onChange={this.onChangeRating}>
@@ -106,7 +109,6 @@ export default class ProductsView extends Component{
                 </div>
             </div>
         )
-    }
-            
+    }          
 }
   
