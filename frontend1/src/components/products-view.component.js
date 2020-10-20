@@ -57,7 +57,8 @@ export default class ProductsView extends Component{
                 <div className="productViewWrapper">
                     <div className="productActual">
                         <div>
-                            <Product {/* JSX boilerplate that plugs in value from the db to the Product component */}
+                            {/* JSX boilerplate that plugs in value from the db to the Product component */}
+                            <Product 
                                 title = {this.state.mdata['itemName']}
                                 description = {this.state.mdata.description}
                                 price = {this.state.mdata.cost}
