@@ -107,25 +107,34 @@ router.route('/products/:id/rating')
     .post((req, res) => {
         shop.findById(req.params.id)
             .then(_item => {
-                let sessEmail = req.session.user.email;
-
-                if (_item.ratings.find(_user => {return _user.email == sessEmail}))  
-                    res.json("Your Rating already exists")
+                if (req.session.user){
+                    let sessEmail = req.session.user.email;
+                    
+                    if (_item.ratings.find(_user => {return _user.email == sessEmail}))  
+                        res.json("Your Rating already exists")
+                    else {
+                        _item.totalRatings = _item.totalRatings + 1;
+                        _item.avgRatings = (_item.avgRatings + parseFloat(req.body.yourRating)) / _item.totalRatings; 
+                        _item.ratings.push({"email": req.session.user.email, "rating": req.body.yourRating});
+                        _item.save()
+                            .then(() => res.json("Your Rating has been recorded"))
+                            .catch(err => res.status(500).json("Error: " + error))
+                    }
+                }
                 else {
-                    _item.totalRatings = _item.totalRatings + 1;
-                    _item.avgRatings = (_item.avgRatings + parseFloat(req.body.yourRating)) / _item.totalRatings; 
-                    _item.ratings.push({"email": req.session.user.email, "rating": req.body.yourRating});
-                    _item.save()
-                        .then(() => res.json("Your Rating has been recorded"))
-                        .catch(err => res.status(500).json("Error: " + error))
+                    res.json("Sign in before rating"); 
                 }
             })
             .catch(err => res.status(500).json("Error: " + error))
     });
 
-
+ 
 router.route('/getProducts')
     .post((req, res) => {
+        
+        /* A POST route that accepts an array of product IDs and returns an array of JSON objects containing the 
+           details of each product */ 
+
         let list = new Array(); 
         for (const param in req.body.data) {
             list.push(mongoose.Types.ObjectId(req.body.data[param])); 

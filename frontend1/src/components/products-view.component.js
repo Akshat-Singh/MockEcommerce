@@ -32,7 +32,7 @@ export default class ProductsView extends Component{
         e.preventDefault();
         axios.post('http://localhost:5000/shop/products/' + this.props.match.params.id + '/rating', {"yourRating": this.state.rating})
             .then(res => {
-                alert(res)
+                alert(JSON.stringify(res.data));
             })
             .catch(err => alert(err)); 
     }
@@ -54,6 +54,7 @@ export default class ProductsView extends Component{
             <div> 
 
                 <Header />
+                
                 <div className="productViewWrapper">
                     <div className="productActual">
                         <div>
