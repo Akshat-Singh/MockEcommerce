@@ -3,12 +3,16 @@
 > Created as a part of the coursework for CS-1202: Advanced Programming (Monsoon 2020)
 
 ## Contents
-- [Main Features] (#--main-features)
-- [Languages and Frameworks] (#--languages-and-frameworks)
+- [Main Features](#--main-features)
+- [Languages and Frameworks](#languages-and-frameworks)
 - [Installation]
 - []
 - [People]
 - [License]
+
+
+## Main Features 
+Lorem Ipsum
 
 ## Languages and Frameworks 
 Main frameworks and languages used: 
