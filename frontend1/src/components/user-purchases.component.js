@@ -3,6 +3,7 @@ import axios from 'axios';
 import Header from '../Header'; 
 import Purchase from './Purchases.js'
 import './Purchases.css'
+import '../CartItem.css'
 
 axios.defaults.baseURL = "";
 axios.defaults.withCredentials = true; 
@@ -35,11 +36,10 @@ export default class UserPurchases extends Component {
    
     render() {
         return (
-            <div className="purchases">
+            <div>
                 <Header/>
-                <h1>My Purchases</h1>
-                <div>
-                    <table>
+                <div className = "cart">
+                    <table className = "cart__table">
                         {this.state.mdata.map((data, index) => ( 
                             <Purchase 
                                 title = {data['itemName']}

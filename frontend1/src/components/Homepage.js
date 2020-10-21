@@ -41,6 +41,9 @@ function Homepage() {
             </Link>
             <Link to = "users/cart">
                 <Button variant="light"> Cart </Button> 
+            </Link> &nbsp;
+            <Link to = "users/profile/purchases">
+                <Button variant="light"> My Purchases </Button> 
             </Link>
             
 
