@@ -12,7 +12,23 @@
 
 
 ## Main Features 
-Lorem Ipsum
+
+## Main Features 
+- **Homepage**
+Homepage consists of anchor links to Products, Sign-in, Register, Wishlist, Cart. It also has a navigation bar consisting of a Home, Contact and Toggle Navbar componenent. 
+- **Products**
+Products page consists of a list of all products. Each product has an individual product "card" which has details such as price, rating, reviews, etc as well as a "know more" link. If clicked, it redirects a page dedicated to that specific product, where a user can view reviews of other users as well as rate the product herself. Reviews are between 0 and 5. 
+The product page can also has a "sort" feature. One can sort by price, name or rating, either in ascending or descending order. It can also display products of a particular category. 
+- **Register and Sign-in**
+
+- **Shopping Cart**
+If the "Add to Cart" button on the product tile is clicked, it add that product to the shopping cart. The shopping cart can be accessed via the Navigation Bar. The cart itself is a tabular representation that displays the product image, title, category, price and the "know more" link for each product, along with two buttons that allow you to either delete from cart or move to the wishlist. 
+
+- **Wish List**
+
+
+
+
 
 ## Languages and Frameworks 
 Main frameworks and languages used: 
@@ -25,7 +41,8 @@ Main frameworks and languages used:
 - CSS Grid 
 
 ### Backend 
-- MongoDB (NoSQL database framework)
+- MongoDB (NoSQL database program)
+- MongoDB Atlas
 - Express 
 - Mongoose  
 
