@@ -14,8 +14,6 @@
 
 
 ## Main Features 
-
-## Main Features 
 - **Homepage:**
 Homepage consists of anchor links to Products, Sign-in, Register, Wishlist, Cart. It also has a navigation bar consisting of a Home, Contact and Toggle Navbar componenent. 
 
