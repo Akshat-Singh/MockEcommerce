@@ -24,9 +24,9 @@ const responseGoogle = response => {
     };
     emailjs.send('computer_parts_store', 'template_8z6kz0g', templateParams, 'user_OXQPAUgJAaocvkKl7iVMf')
     .then(function(response) {
-       console.log('SUCCESS!', response.status, response.text);
+       alert("Your email address [" + GoogleEmail + "] has been successfully linked to your account.");
     }, function(error) {
-       console.log('FAILED...', error);
+       alert('Ran into an error: ', error);
     });
 }
 
