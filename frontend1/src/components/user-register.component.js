@@ -1,15 +1,10 @@
 import React, { Component } from 'react'; 
 import axios from 'axios';
-import {GoogleLogin} from "react-google-login";
 import "./Login.css";
 import {Link} from "react-router-dom";
 
 axios.defaults.baseURL = "";
 axios.defaults.withCredentials = true; 
-
-const responseGoogle = response => {
-    console.log(response);
-};
 
 export default class UserRegister extends Component {
     constructor(props) {
@@ -100,11 +95,6 @@ export default class UserRegister extends Component {
                         <input type="confirm-password" id="confirm-password" placeholder="Confirm Password" onChange={this.onChangeConfirmPassword}></input> 
                         <button className = "login__submit" id="submit" type="submit">Submit</button>
                     </form>
-                    <GoogleLogin className = "login__google"
-                        clientId = "741110853489-3h88ghsg0u7qmjsjs6856g132dt9l5nk.apps.googleusercontent.com"
-                        onSuccess = {responseGoogle}
-                        onFailure = {responseGoogle}
-                    />
 
                 </div>
             </div>

@@ -3,10 +3,15 @@ import axios from 'axios';
 import Header from '../Header'; 
 import {Redirect} from "react-router-dom";
 import {Link} from "react-router-dom";
+import {GoogleLogin} from "react-google-login";
+import "./Login.css";
 
 
 axios.defaults.baseURL = "";
 axios.defaults.withCredentials = true; 
+const responseGoogle = response => {
+    console.log(response);
+};
 
 export default class UserProfile extends Component {
     constructor(props) {
@@ -130,6 +135,12 @@ export default class UserProfile extends Component {
                             <button className = "login__submit" onClick={this.enableAndEdit}>Edit information</button> 
                             <button className = "login__submit" type="submit" hidden={this.state['formFieldsDisabled']}>Submit Updated Information</button> 
                         </form>
+
+                        <GoogleLogin className = "login__google"
+                        clientId = "741110853489-3h88ghsg0u7qmjsjs6856g132dt9l5nk.apps.googleusercontent.com"
+                        onSuccess = {responseGoogle}
+                        onFailure = {responseGoogle}
+                        />
 
                     </div>
                 </div>
