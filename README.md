@@ -4,7 +4,7 @@
 
 ## Contents
 - [Main Features] (#--main-features)
-- [Languages and Frameworks] (#languages-and-frameworks)
+- [Languages and Frameworks] (#--languages-and-frameworks)
 - [Installation]
 - []
 - [People]
