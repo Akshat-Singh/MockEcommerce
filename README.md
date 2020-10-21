@@ -5,7 +5,7 @@
 ## Contents
 - [Main Features](#--main-features)
 - [Languages and Frameworks](#languages-and-frameworks)
-- [Installation]
+- [Installation](#Installation)
 - []
 - [People]
 - [License]
@@ -29,7 +29,7 @@ Main frameworks and languages used:
 - Express 
 - Mongoose  
 
-#### Installation
+## Installation
 - Make sure that node and react are installed on your machine, along with 'create-react-app', 'mongoose', 'bootstrap', and 'axios'
 - Navigate to the backend folder on the terminal. Start the nodejs server by entering 'node app' 
 - Navigate to the frontend folder on a different terminal. Start the react app by entering 'npm start'
