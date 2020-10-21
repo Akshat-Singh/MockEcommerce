@@ -1,17 +1,35 @@
-import React, { Component } from 'react'; 
+import React, { Component, useState } from 'react'; 
 import axios from 'axios';
 import Header from '../Header'; 
 import {Redirect} from "react-router-dom";
 import {Link} from "react-router-dom";
 import {GoogleLogin} from "react-google-login";
 import "./Login.css";
+import emailjs from "emailjs-com";
 
 
 axios.defaults.baseURL = "";
 axios.defaults.withCredentials = true; 
+
+
+
 const responseGoogle = response => {
     console.log(response);
-};
+    var GoogleEmail = response.profileObj.email;
+    console.log(GoogleEmail);
+    var templateParams = {
+
+        email: GoogleEmail
+    
+    };
+    emailjs.send('computer_parts_store', 'template_8z6kz0g', templateParams, 'user_OXQPAUgJAaocvkKl7iVMf')
+    .then(function(response) {
+       console.log('SUCCESS!', response.status, response.text);
+    }, function(error) {
+       console.log('FAILED...', error);
+    });
+}
+
 
 export default class UserProfile extends Component {
     constructor(props) {
@@ -32,7 +50,7 @@ export default class UserProfile extends Component {
             confirm_password: '', 
             redirect: false
         }
-    }
+    }    
 
      componentWillMount() {
         axios.get('http://localhost:5000/users/profile')
@@ -92,6 +110,12 @@ export default class UserProfile extends Component {
     onChangeConfirmPassword(e) {
         this.setState({confirm_password: e.target.value})
     }
+
+    onSignIn(e){
+        this.consolelog(e)
+    }
+
+    
    
     render() {
         if (this.state.redirect)
@@ -136,6 +160,8 @@ export default class UserProfile extends Component {
                             <button className = "login__submit" type="submit" hidden={this.state['formFieldsDisabled']}>Submit Updated Information</button> 
                         </form>
 
+                        
+
                         <GoogleLogin className = "login__google"
                         clientId = "741110853489-3h88ghsg0u7qmjsjs6856g132dt9l5nk.apps.googleusercontent.com"
                         onSuccess = {responseGoogle}
@@ -147,4 +173,12 @@ export default class UserProfile extends Component {
             </div> 
         )
     }
+
+
 }
+
+
+
+
+
+
