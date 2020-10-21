@@ -51,3 +51,14 @@ Main frameworks and languages used:
 - Navigate to the backend folder on the terminal. Start the nodejs server by entering 'node app' 
 - Navigate to the frontend folder on a different terminal. Start the react app by entering 'npm start'
 - 'localhost:3000' should open up in your default browser. 
+
+## People 
+- Akshat Singh: 
+https://github.com/Akshat-Singh
+- Nikhil Bhave
+https://github.com/nikhilbhave9
+- Vibodh Nautiyal 
+https://github.com/vibodhnautiyal
+
+## License
+This project is [MIT](https://opensource.org/licenses/MIT) licensed. 
