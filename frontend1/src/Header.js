@@ -33,7 +33,11 @@ export default class Header extends React.Component{
         .catch(err => console.log(err)); 
     }
 
+    /* Autocomplete and search engine */
+    /* Inspiration from https://www.golangprograms.com/search-autocomplete-in-react-js.html */  
     onTextChange = (e) => {
+        /* Change recommendations when the text in the text box changes */ 
+        
         const value = e.target.value;
         let suggestions = [];
         if(value.length > 0){
@@ -59,6 +63,7 @@ export default class Header extends React.Component{
             return null;
         }
         return (
+            /* Get an unordered list of suggestions from the item Name array for suggestions */ 
             <ul >
                 {
                     suggestions.map((item, index) => (<li key={index}><a href={"http://localhost:3000/products/" + this.state.links[index]}>{item}</a></li>))

@@ -2,15 +2,22 @@ import React from "react"
 import "./WishlistItem.css"
 import axios from "axios"; 
 
-// components: Name, Price, Image, Catergory, UniqueProductID?
-
+/* Components to display individual items in a user's cart */
 
 function CartItem({title, price, image, category, id, description}) {
     function moveToWishlist(e) {
         e.preventDefault();
+
+        /* Function to move an item in the cart to the wishlist */
+        
+
         axios.post('http://localhost:5000/users/cart/delete/' + id)
+            /* Delete the item from the cart */ 
+
             axios.post('http://localhost:5000/users/wishlist/add/' + id)  
                 .then(res => {
+                    /* Add the item to the wishlist */ 
+
                     alert(JSON.stringify(res.data)); 
                     axios.get('http://localhost:5000/users/cart')
                     .then(res => { 
@@ -23,6 +30,9 @@ function CartItem({title, price, image, category, id, description}) {
 
     function deleteFromCart(e) {
         e.preventDefault();
+        
+        /* Function to simply delete a product from the cart */ 
+        
         axios.post('http://localhost:5000/users/cart/delete/' + id)  
             .then(res => {
                 alert(JSON.stringify(res.data));  
@@ -37,7 +47,7 @@ function CartItem({title, price, image, category, id, description}) {
 
     return (
         
-
+        /* Boilerplate code to print a cart item */ 
         <tr className="cart_item">
             
             <img src={image} alt="Product" className="citem_image"/>

@@ -5,6 +5,7 @@ import "../WishlistItem.css"
 
 function Purchase({title, price, image, category, id, description}) {
 
+    /* Component to print user purchases */ 
     return (
         <tr className="cart_item">
             

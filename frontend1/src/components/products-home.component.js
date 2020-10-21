@@ -22,9 +22,12 @@ export default class ProductsHome extends Component{
         this.filter = this.filter.bind(this); 
     }
 
+    /* Execute before the JSX components are mouted */
     componentWillMount() {
         axios.get('http://localhost:5000/shop/products')
             .then(res => {
+                /* Get the list of all the products and set the state */ 
+                
                 this.setState({mdata: res.data}); 
                 console.log(this.state); 
             })
@@ -34,6 +37,7 @@ export default class ProductsHome extends Component{
     sort(e) {
         e.preventDefault(); 
 
+        /* Helper function to sort JSON data by a key */ 
         let sortType = document.querySelector('input[type="radio"]:checked'); 
         if (sortType.value === 'A')
             this.sortAsc(e, sortType.id);
@@ -78,6 +82,7 @@ export default class ProductsHome extends Component{
     }
 
     filter(e) {
+        /* Helper function to filter products by the category */ 
         e.preventDefault(); 
         let value = document.getElementById("Filter").value; 
         this.setState({filter: value}); 
@@ -124,6 +129,7 @@ export default class ProductsHome extends Component{
                 <div className="homepage" style={{"margin-top": "50px"}}>
                     {this.state.mdata.map((data, index) => {
                         if (this.state.filter.length <= 0) {
+                            {/* If no filter has been applied, list all items unconditionally */}
                             return ( 
                                 <Product 
                                     title = {data['itemName']}
@@ -139,6 +145,7 @@ export default class ProductsHome extends Component{
                         }
 
                         else if (this.state.filter === data.category){
+                            {/* If a filter has been applied, list only the items that pass the filter */}
                             return ( 
                                 <Product 
                                     title = {data['itemName']}
