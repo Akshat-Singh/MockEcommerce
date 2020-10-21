@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema; 
 
+
+/* Schema for the database containing the secondary details of a user */ 
 const userSecondarySchema = new Schema({
     email: {type: String, required: true, unique: true},
     address: {type: String, unique: false},

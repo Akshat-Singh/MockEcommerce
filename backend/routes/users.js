@@ -138,6 +138,8 @@ router.route('/profile')
     }); 
 
 
+
+
 /* Trigger the following if "http//www.website.com/users/landing" is called */
 router.route('/landing').get((req, res) => {
     /* A GET route triggered as the user information page. */
@@ -155,7 +157,11 @@ router.route('/landing').get((req, res) => {
 
 
 
+
 router.route('/wishlist').get((req, res) => {
+    
+    /* A GET route that returns a user's wishlist */
+
     if (req.session.user) {
         let email = req.session.user.email;
 
@@ -176,7 +182,12 @@ router.route('/wishlist').get((req, res) => {
 });
 
 
+
+
 router.route('/cart').get((req, res) => {
+    
+    /* A GET route that returns a user's cart */
+    
     if (req.session.user) {
         let email = req.session.user.email;
 
@@ -197,17 +208,23 @@ router.route('/cart').get((req, res) => {
 })
 
 
+
 router.route('/signout')
     .get((req, res) => {
+        
+        /* A GET route that signs a user out of his account */ 
+
         req.session.user = null; 
         res.json("Signed Out"); 
     });
 
 
-module.exports = router;
 
 
 router.route('/cart/add/:id').post((req, res) => {
+    
+    /* A POST route that adds an item to a user's cart */ 
+    
     if (req.session.user) {
         let email = req.session.user.email;
 
@@ -218,6 +235,9 @@ router.route('/cart/add/:id').post((req, res) => {
                     if (!_userData)         
                         return res.json("Error: Data Corrupt");   
                     else {
+                        
+                        /* Avoid duplicate entries in the cart */
+                        
                         if (_userData.cart.indexOf(req.params.id) > -1)
                             res.json(req.params.id + ": Item is already in cart");
                         else {  
@@ -234,7 +254,11 @@ router.route('/cart/add/:id').post((req, res) => {
 })
 
 
+
 router.route('/wishlist/add/:id').post((req, res) => {
+    
+    /* A POST route that adds an item to the user's wishlist */
+
     if (req.session.user) {
         let email = req.session.user.email;
 
@@ -245,6 +269,9 @@ router.route('/wishlist/add/:id').post((req, res) => {
                     if (!_userData)         
                         return res.json("Error: Data Corrupt");   
                     else {  
+
+                        /* Avoid duplicate entries in the cart */ 
+
                         if (_userData.wishlist.indexOf(req.params.id) > -1)
                             res.json(req.params.id + ": Item is already in wishlist"); 
                         else {       
@@ -261,7 +288,12 @@ router.route('/wishlist/add/:id').post((req, res) => {
 })
 
 
+
+
 router.route('/wishlist/delete/:id').post((req, res) => {
+    
+    /* A POST route to delete an item from a user's wishlist */
+
     if (req.session.user) {
         let email = req.session.user.email;
 
@@ -272,7 +304,11 @@ router.route('/wishlist/delete/:id').post((req, res) => {
                     if (!_userData)         
                         return res.json("Error: Data Corrupt");   
                     else {  
+
+                        /* Find the index of the item ID in the wishlist */
                         let index = _userData.wishlist.indexOf(req.params.id);
+                        
+                        /* And delete the item */ 
                         _userData.wishlist.splice(index, 1); 
                         _userData.save(); 
                         res.json(req.params.id + ": Item has been successfully removed from your wishlist");
@@ -286,6 +322,8 @@ router.route('/wishlist/delete/:id').post((req, res) => {
 
 
 router.route('/cart/delete/:id').post((req, res) => {
+    
+    /* A post route that deletes an item from the user's cart */
     if (req.session.user) {
         let email = req.session.user.email;
 
@@ -296,7 +334,11 @@ router.route('/cart/delete/:id').post((req, res) => {
                     if (!_userData)         
                         return res.json("Error: Data Corrupt");   
                     else {  
+
+                        /* Find the index of the item in the cart array */ 
                         let index = _userData.cart.indexOf(req.params.id);
+                        
+                        /* And delete it */ 
                         _userData.cart.splice(index, 1); 
                         _userData.save(); 
                         res.json(req.params.id + ": Item has been successfully removed from your wishlist");   
@@ -309,7 +351,11 @@ router.route('/cart/delete/:id').post((req, res) => {
 })
 
 
+
+
 router.route('/purchase').get((req, res) => {
+    
+    /* A get route that purchases the entire cart of a user */ 
     if (req.session.user) {
         let email = req.session.user.email; 
 
@@ -319,8 +365,13 @@ router.route('/purchase').get((req, res) => {
                     return res.json("Error: Data Corrupt"); 
                 
                 else {
+                    /* Check if the cart is not already empty */ 
                     if (_userData.cart && _userData.cart.length) {
+                        
+                        /* Add all the cart items to the user's purchases */ 
                         _userData.purchases = _userData.purchases.concat(_userData.cart); 
+                        
+                        /* Empty the user's cart */ 
                         _userData.cart = []; 
                         _userData.save()
                             .then(() => res.json("Order Placed :)")) 
@@ -338,7 +389,12 @@ router.route('/purchase').get((req, res) => {
         res.json("Email Not found!");
 })
 
+
+
 router.route('/profile/purchases').get((req, res) => {
+    
+    /* A GET route that return the user's purchases */ 
+
     if (req.session.user) {
         let email = req.session.user.email; 
         userSecondary.findOne({email})
@@ -356,3 +412,6 @@ router.route('/profile/purchases').get((req, res) => {
     else
         res.json("Email Not Found"); 
 })
+
+
+module.exports = router;

@@ -5,25 +5,32 @@ const mongoose = require('mongoose');
 /* Calling the mongoose model we just created */
 let shop = require('../models/shop.model'); 
 let userSecondary = require('../models/user_secondary.model');
-/* Trigger the following when "http//www.website.com/users/" is called */
+
+
+
+
+/* Trigger the following when "http//www.website.com/shop/products" is called */
 router.route('/products').get((req, res) => {
-    /* A GET route that returns the list of all users from the MongoDB database */
+    /* A GET route that returns the list of all products from the MongoDB database */
 
 
     /* If found in the MongoDB */
     shop.find()
 
-        /* Return the users you got from the database in JSON format */ 
+        /* Return the products you got from the database in JSON format */ 
         .then(items => res.json(items))
 
         /* In case you hit an error */
-        .catch(error => res.status(400).json("Error: + err")); 
+        .catch(error => res.status(400).json("Error: " + error)); 
 }); 
 
-/* Trigger the following if "http//www.website.com/users/add" is called */ 
-router.route('/add').post((req, res) => {
-    /* A POST route that adds a user to the database */
 
+
+
+/* Trigger the following if "http//www.website.com/shop/add" is called */ 
+router.route('/add').post((req, res) => {
+
+    /* A POST route that adds a product to the database */
 
     const newShop = new shop({
         itemName: req.body.itemName, 
@@ -41,6 +48,9 @@ router.route('/add').post((req, res) => {
         .catch(err => res.status(400).json("Error: " + err)); 
 }); 
 
+
+
+
 /* Trigger the following if "http//www.website.com/shop/{id}" is called */ 
 router.route('/:id').delete((req, res) => {
     /* A GET route that extracts the details of a product by its ID */
@@ -50,12 +60,16 @@ router.route('/:id').delete((req, res) => {
         .catch(error => res.status(400).json("Error: " + error)); 
 });
 
+
+
+
 /* Trigger the following if "http//www.website.com/shop/update/{id}" is called */
 router.route('/update/:id').post((req, res) => {
     /* A POST route that updates the details of the product given its ID */
 
     shop.findById(req.params.id)
         .then(item => {
+            /* Extracting details in JSON format */ 
             item.itemName = req.body.itemName;
             item.description = req.body.description;
             item.cost = req.body.cost; 
@@ -65,7 +79,10 @@ router.route('/update/:id').post((req, res) => {
                 .catch(error => res.status(400).json("Error: " + error))
         })
         .catch(error => res.status(400).json("Error: " + error))
-}); 
+});
+
+
+
 
 /* Trigger the following if "http//www.website.com/shop/delete/{id}" is called */
 router.route('/update/:id').get((req, res) => {
@@ -85,6 +102,7 @@ router.route('/update/:id').get((req, res) => {
 });
 
 
+
 /* Trigger the following if "http//www.website.com/shop/{id}" is called through get*/ 
 router.route('/products/:id')
     .get((req, res) => {
@@ -96,24 +114,37 @@ router.route('/products/:id')
     });
 
 
+
+ /* Trigger the following if "https://www.website.com/shop/products/{id}/rating is called through get*/   
 router.route('/products/:id/rating')
     .get((req, res) => {
+
+        /* A get route that returns an array containing the ratings of the product */
 
         shop.findById(req.params.id)
             .then(_item => res.json(_item))
             .catch(err => res.status(400).json("Error: " + err));
     })
 
+
     .post((req, res) => {
+        
+        /* A post route that allows a user to post a rating for a product */
+
         shop.findById(req.params.id)
             .then(_item => {
                 if (req.session.user){
                     let sessEmail = req.session.user.email;
                     
+                    /* If the user has already rated the product */
                     if (_item.ratings.find(_user => {return _user.email == sessEmail}))  
                         res.json("Your Rating already exists")
+                    
                     else {
+                        /* Get the last digit of the form supplied rating */
                         let rawRating = (req.body.yourRating.toString()).slice(-1); 
+                        
+                        /* Update the average rating */
                         _item.avgRatings = (_item.avgRatings * _item.totalRatings + parseFloat(rawRating)) / (_item.totalRatings + 1); 
                         _item.totalRatings = _item.totalRatings + 1; 
                         _item.ratings.push({"email": req.session.user.email, "rating": req.body.yourRating});
@@ -128,6 +159,8 @@ router.route('/products/:id/rating')
             })
             .catch(err => res.status(500).json("Error: " + error))
     });
+
+
 
  
 router.route('/getProducts')
@@ -146,6 +179,8 @@ router.route('/getProducts')
             .catch(err => res.json(err));  
 
     })
+
+
 
 
 router.route('/products/:id/verified')
@@ -168,6 +203,8 @@ router.route('/products/:id/verified')
         }
     })
 
+
+    
 
 router.route('/products/:id/verified')
     .get((req, res) => {

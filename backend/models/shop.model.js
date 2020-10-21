@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 
 const schema = mongoose.Schema; 
 
+
+/* Schema for the database that will contain the data of the products */
 const shopSchema = new schema({
     itemName: {type: String, required: true}, 
     description: {type: String, required: true},
