@@ -2,7 +2,7 @@
 
 
 > Project titled "Computer Parts Store" <br />
-> Created using the MERN stack (MongoDB, Express, React.js, Node.js) <br />
+> Created using the MERN stack (MongoDB, Express.js, React.js, Node.js) <br />
 > Created as a part of the coursework for CS-1202: Advanced Programming (Monsoon 2020) <br />
 
 ## Contents
