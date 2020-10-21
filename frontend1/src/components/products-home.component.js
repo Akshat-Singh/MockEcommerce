@@ -40,6 +40,8 @@ export default class ProductsHome extends Component{
     }
 
     sortAsc(e, key) {        
+        /* Function that sorts a JSON object array in ascending on the basis of the key */
+
         e.preventDefault();
         /* Referred to: https://stackoverflow.com/questions/8175093/simple-function-to-sort-an-array-of-objects */ 
 
@@ -56,6 +58,8 @@ export default class ProductsHome extends Component{
     }
 
     sortDsc(e, key) {
+        /* Function that sorts a JSON object array in descending on the basis of the key */ 
+        
         e.preventDefault();
         /* Referred to: https://stackoverflow.com/questions/8175093/simple-function-to-sort-an-array-of-objects */ 
 

@@ -30,11 +30,18 @@ export default class ProductsView extends Component{
     submitRating(e) {
         /* Trigger when the submit button is clicked */
         e.preventDefault();
-        axios.post('http://localhost:5000/shop/products/' + this.props.match.params.id + '/rating', {"yourRating": this.state.rating})
+        axios.get('http://localhost:5000/shop/products/' + this.props.match.params.id + '/verified')
             .then(res => {
-                alert(JSON.stringify(res.data));
+ 
+                let verf = (res.data === 'Y') ? 1899 : 0; 
+
+                axios.post('http://localhost:5000/shop/products/' + this.props.match.params.id + '/rating', {"yourRating": verf.toString().concat(this.state.rating)})
+                .then(res => {
+                    alert(JSON.stringify(res.data));
+                })
+                .catch(err => alert(err));
             })
-            .catch(err => alert(err)); 
+             
     }
 
      componentWillMount() { 
@@ -74,14 +81,29 @@ export default class ProductsView extends Component{
                       
                     {/* Code to print people's ratings using a boiler plate plug and play code */}
                     <div className="ratings"/*style={{color: "blue"}}*/>
-                        <h1>Here's how others rated this product:</h1> 
+                        <h1>Here's how others rated this product:</h1>
+                        <h6 style={{color: "#00FF00"}}>Ratings in Green denote verified buyers</h6>  
+                         
                         <table>
-                            {this.state.ratingsArray.map((data, index) => (
-                                <tr>
-                                    <td>{data.email}:&nbsp;  &nbsp;</td>
-                                    <td className="ratingNum">&nbsp;&nbsp;{data.rating}/5</td>
-                                </tr> 
-                            ))}
+                            {this.state.ratingsArray.map((data, index) => {
+                                if (parseInt(data.rating) > 18989) {
+                                    return(
+                                        <tr style = {{color: "#00FF00"}}>
+                                            <td>{data.email}:&nbsp;  &nbsp;</td>
+                                            <td className="ratingNum">&nbsp;&nbsp;{data.rating.slice(-1)}/5</td>
+                                        </tr>
+                                    ) 
+                                }
+
+                                else {
+                                    return(
+                                        <tr>
+                                            <td>{data.email}:&nbsp;  &nbsp;</td>
+                                            <td className="ratingNum">&nbsp;&nbsp;{data.rating.slice(-1)}/5</td>
+                                        </tr>
+                                    )
+                                }
+                            })}
                         </table>
                     </div>            
                     
