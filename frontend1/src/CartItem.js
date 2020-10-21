@@ -59,8 +59,9 @@ function CartItem({title, price, image, category, id, description}) {
                 <strong className="citem_price_tag">{price}</strong> </h6>
             </td>
 
-            <td><button className = "btn btn-primary btn-sm" onClick={moveToWishlist}>Move to Wishlist</button> 
-            <button className = "btn btn-primary btn-sm" onClick={deleteFromCart}>Delete from Cart</button></td> 
+            <td> <button className = "btn btn-primary btn-sm" onClick={moveToWishlist}>Move to Wishlist</button> </td> 
+            <button className = "btn btn-primary btn-sm" onClick={deleteFromCart}>Delete from Cart</button>
+            
 
         </tr>
 
