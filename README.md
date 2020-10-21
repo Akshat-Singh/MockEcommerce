@@ -51,7 +51,7 @@ Main frameworks and languages used:
 - SHA-256
 
 ## Installation
-- Make sure that node and react are installed on your machine, along with 'create-react-app', 'mongoose', 'bootstrap', and 'axios'
+- Make sure that node and react are installed on your machine, along with 'create-react-app', 'mongoose', 'bootstrap', 'axios', and 'email-js'
 - Navigate to the backend folder on the terminal. Start the nodejs server by entering 'node app' 
 - Navigate to the frontend folder on a different terminal. Start the react app by entering 'npm start'
 - 'localhost:3000' should open up in your default browser. 
@@ -59,7 +59,7 @@ Main frameworks and languages used:
 ## People 
 - Akshat Singh: 
 https://github.com/Akshat-Singh
-- Nikhil Bhave
+- Nikhil Bhave:
 https://github.com/nikhilbhave9
 - Vibodh Nautiyal 
 https://github.com/vibodhnautiyal
