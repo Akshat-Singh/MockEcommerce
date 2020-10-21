@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 /* Calling the mongoose model we just created */
 let shop = require('../models/shop.model'); 
-
+let userSecondary = require('../models/user_secondary.model');
 /* Trigger the following when "http//www.website.com/users/" is called */
 router.route('/products').get((req, res) => {
     /* A GET route that returns the list of all users from the MongoDB database */
@@ -113,8 +113,9 @@ router.route('/products/:id/rating')
                     if (_item.ratings.find(_user => {return _user.email == sessEmail}))  
                         res.json("Your Rating already exists")
                     else {
-                        _item.totalRatings = _item.totalRatings + 1;
-                        _item.avgRatings = (_item.avgRatings + parseFloat(req.body.yourRating)) / _item.totalRatings; 
+                        let rawRating = (req.body.yourRating.toString()).slice(-1); 
+                        _item.avgRatings = (_item.avgRatings * _item.totalRatings + parseFloat(rawRating)) / (_item.totalRatings + 1); 
+                        _item.totalRatings = _item.totalRatings + 1; 
                         _item.ratings.push({"email": req.session.user.email, "rating": req.body.yourRating});
                         _item.save()
                             .then(() => res.json("Your Rating has been recorded"))
@@ -144,6 +145,27 @@ router.route('/getProducts')
             .then(_item => res.json(_item))
             .catch(err => res.json(err));  
 
+    })
+
+
+router.route('/products/:id/verified')
+    .get((req, res) => {
+        /* A POST route that tells the system whether a user is a verified buyer of the item he's rating */
+        let email = req.session.user.email; 
+
+        if (email){
+            userSecondary.findOne({email})
+                .then(_data => {
+                    if(_data.purchases.indexOf(req.params.id) > -1)
+                        return res.json("Y");
+                    else
+                        return res.json("N"); 
+                })
+                .catch(err => res.json(err)); 
+        }
+        else {
+            res.json("User not signed in"); 
+        }
     })
 
 
