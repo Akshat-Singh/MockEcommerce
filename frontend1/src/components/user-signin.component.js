@@ -48,6 +48,11 @@ export default class UserLogin extends Component {
         axios.post('http://localhost:5000/users/login', user)
             .then(res => {
                 sessionStorage.setItem("username", res.data.name);
+                axios.get('http://localhost:5000/users/cart')
+                    .then(res => { 
+                        sessionStorage.setItem("cartLength", res.data.length);
+                    });  
+                
                 this.setState({redirect: true}); 
             }); 
         

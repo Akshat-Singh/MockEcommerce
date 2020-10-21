@@ -1,6 +1,7 @@
 import React from "react"
 import "./Product.css"
 import axios from "axios"; 
+import Header from "./Header"; 
 
 // components: Name, Price, Rating, Image, Catergory, Number of Reviews, UniqueProductID?
 
@@ -11,6 +12,11 @@ function Product({title, price, rating, image, category, reviews, id, descriptio
         axios.post('http://localhost:5000/users/cart/add/' + id)  
             .then(res => {
                 alert(JSON.stringify(res.data));  
+                axios.get('http://localhost:5000/users/cart')
+                .then(res => { 
+                    sessionStorage.setItem("cartLength", res.data.length);
+                });
+                window.location.reload(); 
             })
             .catch(err => alert(JSON.stringify(err))); 
     }

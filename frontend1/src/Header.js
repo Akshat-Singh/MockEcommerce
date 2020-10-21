@@ -11,11 +11,14 @@ export default class Header extends React.Component{
             main_suggestions: [],
             links: [], 
             suggestions: [],
-            text: ''
+            text: '', 
+            cart: 0
         }
     }
 
     componentWillMount() {
+        this.setState({cart: sessionStorage.getItem("cartLength")}); 
+        
         axios.get('http://localhost:5000/shop/products')
             .then(res => {
                 let _suggestions = [];
@@ -113,7 +116,7 @@ export default class Header extends React.Component{
                         <Link to =  "/users/cart" className = "header__link">
         
                             <div className = "header__option">
-                                <span className = "header__selection"> Shopping Cart </span>
+                                <span className = "header__selection"> Shopping Cart</span>
                             </div>
                         </Link>
                         

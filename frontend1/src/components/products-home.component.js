@@ -12,12 +12,14 @@ export default class ProductsHome extends Component{
         super(props); 
 
         this.state = {
-            mdata: []
+            mdata: [], 
+            filter: ""
         }
 
         this.sortAsc = this.sortAsc.bind(this);
         this.sortDsc = this.sortDsc.bind(this);
         this.sort = this.sort.bind(this); 
+        this.filter = this.filter.bind(this); 
     }
 
     componentWillMount() {
@@ -74,15 +76,19 @@ export default class ProductsHome extends Component{
 
         this.setState({mdata: tempData}); 
     }
+
+    filter(e) {
+        e.preventDefault(); 
+        let value = document.getElementById("Filter").value; 
+        this.setState({filter: value}); 
+    }
     
-
-
     
     render() {
         return (
             <div> 
                 <Header/>
-                <div className="CustomFiltering" style={{"padding": "15px", "vertical-align": "middle"}}>
+                <div className="CustomFiltering" style={{"padding": "15px", "vertical-align": "middle", "width": "100%"}}>
                     Sort By
                     <form>
                         <label class="radio-inline">
@@ -103,24 +109,50 @@ export default class ProductsHome extends Component{
                         <label class="radio-inline">
                             <input type="radio" name="optradio" value="A" id="avgRatings"/> Rating: Low to High
                         </label>
-                        <button onClick={this.sort}>Sort</button> 
+                        <button onClick={this.sort}>Sort</button>
+
+                        <select name="Filter" id="Filter" style={{"margin-left": "90px", "margin-right": "20px"}}>
+                            <option value="" disbaled>Category</option> 
+                            <option value="Processor">Processors</option>
+                            <option value="Display">Display</option>
+                            <option value="GPU">GPU</option>
+                        </select>
+                        <button onClick={this.filter}>Filter</button>
                     </form> 
                 </div>
 
                 <div className="homepage" style={{"margin-top": "50px"}}>
-                    {this.state.mdata.map((data, index) => ( 
-                        <Product 
-                            title = {data['itemName']}
-                            description = {data.description}
-                            price = {data.cost}
-                            reviews = {data.totalRatings}
-                            rating = {data.avgRatings}
-                            image = {data['imageLink']}
-                            category = {data.category}
-                            id = {data._id}
-                        />
-        
-                    ))}
+                    {this.state.mdata.map((data, index) => {
+                        if (this.state.filter.length <= 0) {
+                            return ( 
+                                <Product 
+                                    title = {data['itemName']}
+                                    description = {data.description}
+                                    price = {data.cost}
+                                    reviews = {data.totalRatings}
+                                    rating = {data.avgRatings}
+                                    image = {data['imageLink']}
+                                    category = {data.category}
+                                    id = {data._id}
+                                />
+                            )
+                        }
+
+                        else if (this.state.filter === data.category){
+                            return ( 
+                                <Product 
+                                    title = {data['itemName']}
+                                    description = {data.description}
+                                    price = {data.cost}
+                                    reviews = {data.totalRatings}
+                                    rating = {data.avgRatings}
+                                    image = {data['imageLink']}
+                                    category = {data.category}
+                                    id = {data._id}
+                                />
+                            )
+                        }
+                    })}
                 </div>
             </div>
         )

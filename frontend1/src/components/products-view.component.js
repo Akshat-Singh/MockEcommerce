@@ -92,7 +92,7 @@ export default class ProductsView extends Component{
                                             <td>{data.email}:&nbsp;  &nbsp;</td>
                                             <td className="ratingNum">&nbsp;&nbsp;{data.rating.slice(-1)}/5</td>
                                         </tr>
-                                    ) 
+                                    )   
                                 }
 
                                 else {

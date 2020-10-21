@@ -52,6 +52,10 @@ export default class UserCart extends Component {
         axios.get('http://localhost:5000/users/purchase')
             .then(res => {
                 alert(JSON.stringify(res.data)); 
+                axios.get('http://localhost:5000/users/cart')
+                .then(res => { 
+                    sessionStorage.setItem("cartLength", res.data.length);
+                });
                 window.location.reload(); 
             })
             .catch(err => console.log(err)); 

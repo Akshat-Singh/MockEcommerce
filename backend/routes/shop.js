@@ -169,4 +169,25 @@ router.route('/products/:id/verified')
     })
 
 
+router.route('/products/:id/verified')
+    .get((req, res) => {
+    /* A POST route that tells the system whether a user is a verified buyer of the item he's rating */
+    let email = req.session.user.email; 
+
+        if (email){
+            userSecondary.findOne({email})
+                .then(_data => {
+                    if(_data.purchases.indexOf(req.params.id) > -1)
+                        return res.json("Y");
+                    else
+                        return res.json("N"); 
+                    })
+                .catch(err => res.json(err)); 
+        }
+        else {
+            res.json("User not signed in"); 
+        }
+    })
+
+
 module.exports = router;

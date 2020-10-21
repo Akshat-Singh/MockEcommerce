@@ -12,6 +12,10 @@ function WishlistItem({title, price, image, category, id, description}) {
                 axios.post('http://localhost:5000/users/cart/add/' + id)  
                     .then(res => {
                         alert(JSON.stringify(res.data)); 
+                        axios.get('http://localhost:5000/users/cart')
+                        .then(res => { 
+                            sessionStorage.setItem("cartLength", res.data.length);
+                        });
                         window.location.reload(); 
                     })
                     .catch(err => alert(JSON.stringify(err)))
