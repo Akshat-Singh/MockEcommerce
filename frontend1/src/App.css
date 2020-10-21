@@ -2,6 +2,9 @@
    margin: 0; 
 }
 
+/* Homepage here refers to the product home page that displays all available products */
+
+/* Added some basic styling to the product page */
 .homepage {
    display: grid;
    grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -9,23 +12,3 @@
    
 }
 
-/* .homepage div {
-   flex: 4; 
-   border: 1px #ccc solid;
-   padding: 10px;
-} */
-
-/* .homepage .product {
-   /* display: flex;
-   flex: 4;  */
-   /* display: grid;
-   grid-template-rows: 1fr 1fr;
-   border: 1px #ccc solid;
-   padding: 10px;
-   margin: 5px;
-   min-width: 200px;
-   max-width: 400px;
-   background-color: rgb(118, 116, 121);    
-   margin: 5px;
-   
-} */

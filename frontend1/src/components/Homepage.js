@@ -9,17 +9,23 @@ function Homepage() {
 
     <div className = "htmlbody text-center">
 
+      
     <div className="cover-container d-flex h-100 p-3 mx-auto flex-column">
+
+      {/*============== Header of Home Page ==============*/}
+      
       <header className="masthead mb-auto">
         <div className="inner">
           <h3 className="masthead-brand">Computer Parts Store</h3>
           <nav className="nav nav-masthead justify-content-center">
             <Link className="nav-link active" to ="/">Home</Link>
-            <Link className="nav-link" to ="/withNavbar">Display Navigation Bar</Link>
-            <Link className="nav-link" to ="#">Contact</Link>
+            <Link className="nav-link" to ="/withNavbar">Navigation Bar</Link>
+            {/* <Link className="nav-link" to ="#">Contact</Link> */}
           </nav>
         </div>
       </header>
+
+      {/* ============== Main Body of the Home Page ============== */}
 
       <main role="main" className="inner cover">
         <h1 className="cover-heading"> One-stop shop for your PC needs.</h1>
@@ -49,6 +55,8 @@ function Homepage() {
 
         </p>
       </main>
+
+      {/* ============== Footer of the Home Page ============== */}
 
       <footer className="mastfoot mt-auto">
         <div className="inner">

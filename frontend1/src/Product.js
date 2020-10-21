@@ -32,31 +32,33 @@ function Product({title, price, rating, image, category, reviews, id, descriptio
 
     return (
         <div className="product">
-
-            <div className="firstline">
+            {/* Product Title */}
+            <div className="firstline"> {/* Divided into different lines for ease of CSS styling */}
                 <p className="product_title">
                     {title}
                 </p>
             </div>
 
-            <div className="secondline">
+            {/* Product Price */}
+            <div className="secondline"> 
                 <p className="product_price">
                     <small>₹</small>
                     <strong className="product_price_tag">{price}</strong>
                 </p>
-
-
                 
             </div>
 
+            {/* Product Image */}
             <img src={image} alt="Product" className="product_image"/>
 
+            {/* Product Category */}
             <div className="thirdline">
             <p className="product_category">
                     Catergory: <strong>{category}</strong>
             </p>
             </div>
 
+            {/* Product Rating */}
             <div className="fourthline">
             <p className="product_rating">
                     {/* Timestamp 2:15 */}
@@ -65,18 +67,21 @@ function Product({title, price, rating, image, category, reviews, id, descriptio
             </p>
             </div>
 
+            {/* Product Reviews */}
             <div className="fifthline">
             <p className="product_reviews">
                 {reviews} customer(s) have reviewed this product
             </p>
             </div>
 
+            {/* Product ID that redirects to specific product page */}
             <div className="sixthline">
             <p className="product_id">
                 Click <a href={"/products/" + id}>here</a> to view
             </p>
             </div>
 
+            {/* Buttons for adding to cart and wishlist */}
             <button onClick={addToCart}>Add to Cart</button>
             <button onClick={Wishlist}>Wishlist Item</button> 
 

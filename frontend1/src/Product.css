@@ -1,4 +1,5 @@
 
+/* Product wrapper to display all products */
 .product {
     display: grid;
     grid-template-rows: 1fr 1fr;

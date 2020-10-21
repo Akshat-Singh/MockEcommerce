@@ -1,7 +1,7 @@
 import React from "react"
 import "./Product.css"
 
-// components: Name, Price, Rating, Image, Catergory, Number of Reviews, UniqueProductID?
+// Handles ratings for each product title in the product page
 
 function Product({title, price, rating, image, category, reviews, id, description}) {
     return (
@@ -17,7 +17,6 @@ function Product({title, price, rating, image, category, reviews, id, descriptio
             </p>
 
             <p className="product_rating">
-                {/* Timestamp 2:15 */}
                 {rating}
 
             </p>
