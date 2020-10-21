@@ -1,12 +1,14 @@
-<h1 align="center">E-Commerce Web Platform: "Computer Parts Store"</h1>
-- Created using the MERN stack (MongoDB, Express, React.js, Node.js)
-- Created as a part of the coursework for CS-1202: Advanced Programming (Monsoon 2020)
+<h1 align="center">E-Commerce Web Platform</h1>
+
+
+> Project titled "Computer Parts Store" <br />
+> Created using the MERN stack (MongoDB, Express, React.js, Node.js) <br />
+> Created as a part of the coursework for CS-1202: Advanced Programming (Monsoon 2020) <br />
 
 ## Contents
 - [Main Features](#--main-features)
 - [Languages and Frameworks](#languages-and-frameworks)
 - [Installation](#installation)
-- []
 - [People](#people)
 - [License](#license)
 
