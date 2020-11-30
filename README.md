@@ -30,9 +30,6 @@ Finally, the logout option on the navigation bar logs you out.
 If the "Add to Cart" button on the product tile is clicked, it add that product to the shopping cart. The shopping cart can be accessed via the Navigation Bar. The cart itself is a tabular representation that displays the product image, title, category, price and the "know more" link for each product, along with two buttons that allow you to either delete from cart or move to the wishlist. Similarly, the wishlist has the option to move to cart and delete from wishlist. 
 
 
-
-
-
 ## Languages and Frameworks 
 Main frameworks and languages used: 
 #### Frontend
